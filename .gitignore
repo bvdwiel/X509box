@@ -19,3 +19,10 @@
 *.exe
 *.out
 *.app
+
+#X509box-specifics
+X509box
+Makefile
+cmake_install*
+CMakeCache.txt
+CMakeFiles/
