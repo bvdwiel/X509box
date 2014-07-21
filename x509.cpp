@@ -11,6 +11,11 @@ X509::~X509() {
 	delete objectID;
 }
 
+void X509::debug() {
+	std::cout << this->pemCSR << std::endl;
+	std::cout << this->privateKey << std::endl;
+}
+
 std::string X509::generateCSR() {
 	return ( this->generateCSR(this->objectID));
 }

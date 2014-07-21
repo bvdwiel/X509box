@@ -5,8 +5,9 @@ int main() {
 X509* crypto;
 crypto = new X509;
 try {
-	std::cout << crypto->generatePrivateKey() << std::endl;
-	std::cout << crypto->generateCSR() << std::endl;
+	crypto->generatePrivateKey();
+	crypto->generateCSR();
+	crypto->debug();
 }
 catch(const char* e) {
 	std::cerr << e << std::endl;

@@ -20,6 +20,7 @@ public:
 	std::string generateCSR(OID* oid);
 	std::string generatePrivateKey();
 	std::string generatePrivateKey(unsigned int numBits);
+	void debug();
 protected:
 	std::string pemCSR;
 	std::string privateKey;
