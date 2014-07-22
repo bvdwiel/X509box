@@ -37,7 +37,7 @@ std::string X509::generateCSR(OID* oid) {
 	pemdata.data = (unsigned char*)this->privateKey.c_str();
 
 	if ( gnutls_x509_privkey_init(&tempKey) < 0 ) {
-		throw( "FATAL ERROR: failed to init temporary privkey structure while generating CSR."); 
+		throw( "FATAL ERROR: failed to init temporary privkey structure while generating CSR.");
 	}
 	if ( gnutls_x509_privkey_import2(tempKey, &pemdata, GNUTLS_X509_FMT_PEM, NULL, 0) < 0 ) {
 		throw ( "FATAL ERROR: failed to import private key while generating CSR." );
@@ -48,13 +48,37 @@ std::string X509::generateCSR(OID* oid) {
 	/* CountryName is optional */
 	if ( oid->getCountryName().size() > 0 ) {
 		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_COUNTRY_NAME, 0, oid->getCountryName().c_str(), oid->getCountryName().size()) < 0 ) {
-			throw ( "FATAL ERROR: Failed setting CountryName attribute." );
+			throw ( "FATAL ERROR: Failed to set CountryName attribute." );
+		}
+	}
+	/* StateOrProvinceName is optional */
+	if ( oid->getStateOrProvinceName().size() > 0 ) {
+		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_STATE_OR_PROVINCE_NAME, 0, oid->getStateOrProvinceName().c_str(), oid->getStateOrProvinceName().size()) != 0 ) {
+			throw ( "FATAL ERROR: Failed to set StateOrProvinceName attribute." );
 		}
 	}
 	/* LocalityName is optional */
 	if ( oid->getLocalityName().size() > 0 ) {
-		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_LOCALITY_NAME, 0, oid->getLocalityName().c_str(), oid->getLocalityName().size()) <0 ) {
+		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_LOCALITY_NAME, 0, oid->getLocalityName().c_str(), oid->getLocalityName().size()) < 0 ) {
 			throw ( "FATAL ERROR: Failed to set LocalityName attribute." );
+		}
+	}
+	/* StreetAddress is optional */
+	if ( oid->getStreetAddress().size() > 0 ) {
+		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_STREET_ADDRESS, 0, oid->getStreetAddress().c_str(), oid->getStreetAddress().size()) < 0 ) {
+			throw ( "FATAL ERROR: Failed to set StreetAddress attribute." );
+		}
+	}
+	/* OrganizationName is optional */
+	if ( oid->getOrganizationName().size() > 0 ) {
+		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_ORGANIZATION_NAME, 0, oid->getOrganizationName().c_str(), oid->getOrganizationName().size()) < 0 ) {
+			throw ( "FATAL ERROR: Failed to set OrganizationName attribute." );
+		}
+	}
+	/* OrganizationalUnitName is optional */
+	if ( oid->getOrganizationalUnitName().size() > 0 ) {
+		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_ORGANIZATIONAL_UNIT_NAME, 0, oid->getOrganizationalUnitName().c_str(), oid->getOrganizationalUnitName().size()) < 0 ) {
+			throw ( "FATAL ERROR: Failed to set OrganizationalUnitName attribute." );
 		}
 	}
 	/* CommonName is mandatory */
