@@ -63,12 +63,6 @@ std::string X509::generateCSR(OID* oid) {
 			throw ( "FATAL ERROR: Failed to set LocalityName attribute." );
 		}
 	}
-	/* StreetAddress is optional */
-	if ( oid->getStreetAddress().size() > 0 ) {
-		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_STREET_ADDRESS, 0, oid->getStreetAddress().c_str(), oid->getStreetAddress().size()) < 0 ) {
-			throw ( "FATAL ERROR: Failed to set StreetAddress attribute." );
-		}
-	}
 	/* OrganizationName is optional */
 	if ( oid->getOrganizationName().size() > 0 ) {
 		if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_ORGANIZATION_NAME, 0, oid->getOrganizationName().c_str(), oid->getOrganizationName().size()) < 0 ) {

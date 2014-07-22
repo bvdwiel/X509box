@@ -5,7 +5,6 @@ OID::OID() {
 	this->setCountryName("ARDA");
 	this->setStateOrProvinceName("Middle-Earth");
 	this->setLocalityName("The Shire");
-	this->setStreetAddress("Bag End");
 	this->setOrganizationName("Bilbo's place.");
 	this->setOrganizationalUnitName("Catering");
 	this->setCommonName("eleventyone.party.com");
@@ -15,7 +14,6 @@ void OID::debug() {
 	std::cerr << "CountryName: " << this->getCountryName() << std::endl;
 	std::cerr << "StateOrProvinceName: " << this->getStateOrProvinceName() << std::endl;
 	std::cerr << "LocalityName: " << this->getLocalityName() << std::endl;
-	std::cerr << "StreetAddress: " << this->getStreetAddress() << std::endl;
 	std::cerr << "OrganizationName: " << this->getOrganizationName() << std::endl;
 	std::cerr << "OrganizationalUnitName: " << this->getOrganizationalUnitName() << std::endl;
 	std::cerr << "CommonName: " << this->getCommonName() << std::endl;
@@ -32,10 +30,6 @@ std::string OID::getStateOrProvinceName() {
 
 std::string OID::getLocalityName() {
 	return ( this->localityName );
-}
-
-std::string OID::getStreetAddress() {
-	return ( this->streetAddress );
 }
 
 std::string OID::getOrganizationName() {
@@ -62,10 +56,6 @@ void OID::setStateOrProvinceName(std::string stateOrProvinceName) {
 
 void OID::setLocalityName(std::string localityName) {
 	this->localityName = localityName;
-}
-
-void OID::setStreetAddress(std::string streetAddress) {
-	this->streetAddress = streetAddress;
 }
 
 void OID::setOrganizationName(std::string organizationName) {

@@ -14,14 +14,12 @@ public:
 	std::string getCountryName();
 	std::string getStateOrProvinceName();
 	std::string getLocalityName();
-	std::string getStreetAddress();
 	std::string getOrganizationName();
 	std::string getOrganizationalUnitName();
 	std::string getCommonName();
 	void setCountryName(std::string countryName);
 	void setStateOrProvinceName(std::string stateOrProvinceName);
 	void setLocalityName(std::string localityName);
-	void setStreetAddress(std::string streetAddress);
 	void setOrganizationName(std::string organizationName);
 	void setOrganizationalUnitName(std::string organizationalUnitName);
 	void setCommonName(std::string commonName);
@@ -30,7 +28,6 @@ protected:
 	std::string countryName;
 	std::string stateOrProvinceName;
 	std::string localityName;
-	std::string streetAddress;
 	std::string organizationName;
 	std::string organizationalUnitName;
 	std::string commonName;
