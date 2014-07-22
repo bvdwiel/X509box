@@ -45,13 +45,27 @@ std::string X509::generateCSR(OID* oid) {
 	if ( gnutls_x509_crq_init(&CSR) < 0) {
 		throw ( "FATAL ERROR: failed to initialize CSR struct." );
 	}
-	gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_COUNTRY_NAME, 0, oid->getCountryName().c_str(), oid->getCountryName().size());
-	gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_LOCALITY_NAME, 0, oid->getLocalityName().c_str(), oid->getLocalityName().size());
-	gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_COMMON_NAME, 0, "eleventyone.party.com",21);
-	gnutls_x509_crq_set_version(CSR, 1);
-	gnutls_x509_crq_set_key(CSR, tempKey);
-	gnutls_x509_crq_sign2(CSR, tempKey, GNUTLS_DIG_SHA1, 0);
-	gnutls_x509_crq_export(CSR, GNUTLS_X509_FMT_PEM, csrBuffer, &csrBufferSize);
+	if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_COUNTRY_NAME, 0, oid->getCountryName().c_str(), oid->getCountryName().size()) < 0 ) {
+		throw ( "FATAL ERROR: Failed setting CountryName attribute." );
+	}
+	if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_LOCALITY_NAME, 0, oid->getLocalityName().c_str(), oid->getLocalityName().size()) <0 ) {
+		throw ( "FATAL ERROR: Failed to set LocalityName attribute." );
+	}
+	if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_COMMON_NAME, 0, "eleventyone.party.com",21) < 0 ) {
+		throw ( "FATAL ERROR: failed to set commonName attribute." );
+	}
+	if ( gnutls_x509_crq_set_version(CSR, 1) < 0 ) {
+		throw ( "FATAL ERROR: failed to set CSR version." );
+	}
+	if ( gnutls_x509_crq_set_key(CSR, tempKey) < 0 ) {
+		throw ( "FATAL ERROR: failed to associalte private key with CSR." );
+	}
+	if ( gnutls_x509_crq_sign2(CSR, tempKey, GNUTLS_DIG_SHA1, 0) < 0 ); {
+		throw ( "FATAL ERROR: failed to sign CSR." );
+	}
+	if ( gnutls_x509_crq_export(CSR, GNUTLS_X509_FMT_PEM, csrBuffer, &csrBufferSize) < 0 ) {
+		throw ( "FATAL ERROR: failed to export CSR to PEM format." );
+	}
 	std::string pemCsrBuffer((const char*) csrBuffer);
 	this->pemCSR = pemCsrBuffer;
 	return pemCsrBuffer;
