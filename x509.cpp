@@ -58,7 +58,7 @@ std::string X509::generateCSR(OID* oid) {
 		}
 	}
 	/* CommonName is mandatory */
-	if ( oid->getCommonName().size() < 0 ) {
+	if ( oid->getCommonName().size() <= 0 ) {
 		throw( "FATAL ERROR: CSR cannot be generated without a CommonName." );
 	}
 	if ( gnutls_x509_crq_set_dn_by_oid(CSR, GNUTLS_OID_X520_COMMON_NAME, 0, oid->getCommonName().c_str(),oid->getCommonName().size()) < 0 ) {
