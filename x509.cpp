@@ -88,7 +88,7 @@ std::string X509::generateCSR(OID* oid) {
 	if ( gnutls_x509_crq_set_key(CSR, tempKey) < 0 ) {
 		throw ( "FATAL ERROR: failed to associate private key with CSR." );
 	}
-	if ( gnutls_x509_crq_sign2(CSR, tempKey, GNUTLS_DIG_SHA1, 0) != 0 ) {
+	if ( gnutls_x509_crq_sign2(CSR, tempKey, GNUTLS_DIG_SHA256, 0) != 0 ) {
 		throw ( "FATAL ERROR: failed to sign CSR." );
 	}
 	if ( gnutls_x509_crq_export(CSR, GNUTLS_X509_FMT_PEM, csrBuffer, &csrBufferSize) < 0 ) {
