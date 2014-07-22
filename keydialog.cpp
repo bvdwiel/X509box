@@ -6,6 +6,8 @@
 
 keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
 	label = new QLabel(tr("Key size in bits:"));
+	instruction = new QLabel(tr("Copy all of the above text, save it to a plaintext file and guard it closely."));
+	instruction->hide();
 	keySizeSelector = new QComboBox;
 	keySizeSelector->addItem("1024");
 	keySizeSelector->addItem("2048");
@@ -16,6 +18,7 @@ keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
 	keyResultArea->setFontFamily("Courier");
 	keyResultArea->setMinimumWidth(500);
 	keyResultArea->setMinimumHeight(450);
+	keyResultArea->setReadOnly(true);
 	generateKeyButton = new QPushButton(tr("&Generate key"));
 	quitButton = new QPushButton(tr("&Close"));
 
@@ -31,6 +34,7 @@ keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
 	QVBoxLayout* leftLayout = new QVBoxLayout;
 	leftLayout->addLayout(topLeftLayout);
 	leftLayout->addWidget(keyResultArea);
+	leftLayout->addWidget(instruction);
 
 	QVBoxLayout* rightLayout = new QVBoxLayout;
 	rightLayout->addStretch();
@@ -48,5 +52,6 @@ void keyDialog::generateKey() {
 	std::string pemKey;
 	pemKey = crypto->generatePrivateKey(keySizeSelector->currentText().toInt());
 	keyResultArea->setText(pemKey.c_str());
+	instruction->show();
 	delete crypto;
 }

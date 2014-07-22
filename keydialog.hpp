@@ -21,6 +21,7 @@ private slots:
 	void generateKey();
 private:
 	QLabel* label;
+	QLabel* instruction;
 	QComboBox* keySizeSelector;
 	QTextEdit* keyResultArea;
 	QPushButton* generateKeyButton;
