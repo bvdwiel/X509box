@@ -93,9 +93,15 @@ std::string X509::generatePrivateKey(unsigned int numBits) {
 	gnutls_x509_privkey_t myPrivateKey;
 	unsigned char buffer[10 * 1024];
 	size_t buffer_size = sizeof(buffer);
-	gnutls_x509_privkey_init(&myPrivateKey);
-	gnutls_x509_privkey_generate(myPrivateKey, GNUTLS_PK_RSA, numBits, 0);
-	gnutls_x509_privkey_export(myPrivateKey, GNUTLS_X509_FMT_PEM, buffer, &buffer_size);
+	if ( gnutls_x509_privkey_init(&myPrivateKey) != 0 ) {
+		throw ( "FATAL ERROR: failed to initialize the private key object." );
+	}
+	if ( gnutls_x509_privkey_generate(myPrivateKey, GNUTLS_PK_RSA, numBits, 0) != 0 ) {
+		throw ( "FATAL ERROR: failed to generate the private key." );
+	}
+	if ( gnutls_x509_privkey_export(myPrivateKey, GNUTLS_X509_FMT_PEM, buffer, &buffer_size) != 0 ) {
+		throw ( "FATAL ERROR: failed to export the private key to PEM format." );
+	}
 	std::string pemBuffer((const char*) buffer);
 	gnutls_x509_privkey_deinit(myPrivateKey);
 	this->privateKey = pemBuffer;
