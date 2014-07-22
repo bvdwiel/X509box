@@ -1,20 +1,11 @@
 #include "x509.hpp"
 #include <exception>
+#include <QApplication>
+#include "keydialog.hpp"
 
-int main() {
-X509* crypto;
-crypto = new X509;
-try {
-	crypto->generatePrivateKey();
-	crypto->generateCSR();
-	crypto->debug();
+int main(int argc, char* argv[]) {
+	QApplication app(argc, argv);
+	keyDialog* dialog = new keyDialog;
+	dialog->show();
+	return app.exec();
 }
-catch(const char* e) {
-	std::cerr << e << std::endl;
-	delete ( crypto );
-	return ( 1 );
-}
-delete ( crypto );
-return ( 0 );
-}
-
