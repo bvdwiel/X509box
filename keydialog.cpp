@@ -15,12 +15,13 @@ keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
 	keyResultArea = new QTextEdit;
 	keyResultArea->setFontFamily("Courier");
 	keyResultArea->setMinimumWidth(500);
-	keyResultArea->setMinimumHeight(500);
+	keyResultArea->setMinimumHeight(450);
 	generateKeyButton = new QPushButton(tr("&Generate key"));
-	quitButton = new QPushButton(tr("&Quit"));
+	quitButton = new QPushButton(tr("&Close"));
 
 	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
 	connect(generateKeyButton, SIGNAL(clicked()), this, SLOT(generateKey()));
+	connect(keySizeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(generateKey()));
 	setWindowTitle(tr("Generate RSA private key"));
 
 	QHBoxLayout* topLeftLayout = new QHBoxLayout;
@@ -45,7 +46,7 @@ keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
 void keyDialog::generateKey() {
 	X509* crypto = new X509;
 	std::string pemKey;
-	pemKey = crypto->generatePrivateKey();
+	pemKey = crypto->generatePrivateKey(keySizeSelector->currentText().toInt());
 	keyResultArea->setText(pemKey.c_str());
 	delete crypto;
 }
