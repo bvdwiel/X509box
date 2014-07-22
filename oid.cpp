@@ -5,7 +5,7 @@ OID::OID() {
 	this->setCountryName("ARDA");
 	this->setStateOrProvinceName("Middle-Earth");
 	this->setLocalityName("The Shire");
-	this->setOrganizationName("Bilbo's place.");
+	this->setOrganizationName("Bilbo's place");
 	this->setOrganizationalUnitName("Catering");
 	this->setCommonName("eleventyone.party.com");
 }
