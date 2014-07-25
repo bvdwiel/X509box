@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]) {
 	QApplication app(argc, argv);
-	keyDialog* dialog = new mainDialog;
+	mainDialog* dialog = new mainDialog;
 	dialog->show();
 	return app.exec();
 }
