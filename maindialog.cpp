@@ -1,10 +1,10 @@
 #include <QtWidgets>
 #include <iostream>
 #include <string>
-#include "keydialog.hpp"
+#include "maindialog.hpp"
 #include "x509.hpp"
 
-keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
+mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	label = new QLabel(tr("Key size in bits:"));
 	instruction = new QLabel(tr("Copy all of the above text, save it to a plaintext file and guard it closely."));
 	instruction->hide();
@@ -47,7 +47,7 @@ keyDialog::keyDialog(QWidget* parent) : QDialog(parent) {
 	setLayout(mainLayout);
 }
 
-void keyDialog::generateKey() {
+void mainDialog::generateKey() {
 	X509* crypto = new X509;
 	std::string pemKey;
 	pemKey = crypto->generatePrivateKey(keySizeSelector->currentText().toInt());

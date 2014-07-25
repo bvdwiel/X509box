@@ -1,9 +1,9 @@
 /**
- * X509box dialog for RSA key parameters
+ * X509box dialog for CSR generation
  **/
 
-#ifndef KEYDIALOG_H
-#define KEYDIALOG_H
+#ifndef MAINDIALOG_H
+#define MAINDIALOG_H
 
 #include <QDialog>
 
@@ -12,11 +12,11 @@ class QLabel;
 class QTextEdit;
 class QPushButton;
 
-class keyDialog : public QDialog {
+class mainDialog : public QDialog {
 	Q_OBJECT
 
 public:
-	keyDialog(QWidget* parent = 0);
+	mainDialog(QWidget* parent = 0);
 private slots:
 	void generateKey();
 private:
@@ -28,4 +28,4 @@ private:
 	QPushButton* quitButton;
 };
 
-#endif /*KEYDIALOG_H*/
+#endif /*MAINDIALOG_H*/
