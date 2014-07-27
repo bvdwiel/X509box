@@ -77,6 +77,10 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	commonNameLayout->addWidget(commonNameLabel);
 	commonNameLayout->addWidget(commonNameField);
 
+	QHBoxLayout* keySizeLayout = new QHBoxLayout;
+	keySizeLayout->addWidget(keySizeLabel);
+	keySizeLayout->addWidget(keySizeSelector);
+
 	QVBoxLayout* metaFieldsLayout = new QVBoxLayout;
 	metaFieldsLayout->addLayout(countryLayout);
 	metaFieldsLayout->addLayout(stateLayout);
@@ -84,17 +88,14 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	metaFieldsLayout->addLayout(organizationLayout);
 	metaFieldsLayout->addLayout(organizationalUnitLayout);
 	metaFieldsLayout->addLayout(commonNameLayout);
-
-	QHBoxLayout* keySizeLayout = new QHBoxLayout;
-	keySizeLayout->addWidget(keySizeLabel);
-	keySizeLayout->addWidget(keySizeSelector);
+	metaFieldsLayout->addLayout(keySizeLayout);
+	metaFieldsLayout->addStretch();
 
 	QVBoxLayout* keyLayout = new QVBoxLayout;
 	keyLayout->addWidget(keyLabel);
 	keyLayout->addWidget(keyField);
 
 	QVBoxLayout* privateKeyLayout = new QVBoxLayout;
-	privateKeyLayout->addLayout(keySizeLayout);
 	privateKeyLayout->addLayout(keyLayout);
 
 	QHBoxLayout* buttonsLayout = new QHBoxLayout;
