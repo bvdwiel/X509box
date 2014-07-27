@@ -9,6 +9,7 @@
 
 class QComboBox;
 class QLabel;
+class QLineEdit;
 class QTextEdit;
 class QPushButton;
 
@@ -20,11 +21,25 @@ public:
 private slots:
 	void generateKey();
 private:
-	QLabel* label;
-	QLabel* instruction;
+	QLabel* countryLabel;
+	QLineEdit* countryField;
+	QLabel* stateLabel;
+	QLineEdit* stateField;
+	QLabel* localityLabel;
+	QLineEdit* localityField;
+	QLabel* organizationLabel;
+	QLineEdit* organizationField;
+	QLabel* organizationalUnitLabel;
+	QLineEdit* organizationalUnitField;
+	QLabel* commonNameLabel;
+	QLineEdit* commonNameField;
+	QLabel* keySizeLabel;
 	QComboBox* keySizeSelector;
-	QTextEdit* keyResultArea;
-	QPushButton* generateKeyButton;
+	QLabel* keyLabel;
+	QTextEdit* keyField;
+	QLabel* csrLabel;
+	QTextEdit* csrField;
+	QPushButton* generateCsrButton;
 	QPushButton* quitButton;
 };
 
