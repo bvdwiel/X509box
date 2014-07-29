@@ -113,17 +113,16 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	mainLayout->addLayout(csrLayout);
 	setLayout(mainLayout);
 
-	//connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
-	//connect(generateKeyButton, SIGNAL(clicked()), this, SLOT(generateKey()));
+	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(generateCsrButton, SIGNAL(clicked()), this, SLOT(generateKey()));
 	//connect(keySizeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(generateKey()));
 	setWindowTitle(tr("X509box"));
 }
 
 void mainDialog::generateKey() {
-	/* X509* crypto = new X509;
+	X509* crypto = new X509;
 	std::string pemKey;
 	pemKey = crypto->generatePrivateKey(keySizeSelector->currentText().toInt());
-	keyResultArea->setText(pemKey.c_str());
-	instruction->show();
-	delete crypto;*/
+	keyField->setText(pemKey.c_str());
+	delete crypto;
 }
