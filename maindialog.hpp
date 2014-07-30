@@ -10,8 +10,28 @@
 class QComboBox;
 class QLabel;
 class QLineEdit;
+class QTabWidget;
 class QTextEdit;
 class QPushButton;
+
+class dataTab : public QWidget {
+	Q_OBJECT
+
+public:
+	//dataTab();
+};
+
+class keyTab : public QWidget {
+	Q_OBJECT
+};
+
+class csrTab : public QWidget {
+	Q_OBJECT
+};
+
+class p12Tab : public QWidget {
+	Q_OBJECT
+};
 
 class mainDialog : public QDialog {
 	Q_OBJECT
@@ -39,6 +59,7 @@ private:
 	QTextEdit* keyField;
 	QLabel* csrLabel;
 	QTextEdit* csrField;
+	QTabWidget* tabs;
 	QPushButton* generateCsrButton;
 	QPushButton* quitButton;
 };

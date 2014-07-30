@@ -5,7 +5,14 @@
 #include "x509.hpp"
 
 mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
-	/* Labels */
+	/* Tab container */
+	tabs = new QTabWidget;
+	tabs->addTab(new dataTab(), tr("Certificate data"));
+	tabs->addTab(new keyTab(), tr("Private key"));
+	tabs->addTab(new csrTab(), tr("Signing request"));
+	tabs->addTab(new p12Tab(), tr("PFX generator"));
+
+	/* Labels 
 	countryLabel = new QLabel(tr("Country:"));
 	stateLabel = new QLabel(tr("State or province:"));
 	localityLabel = new QLabel(tr("City or locality:"));
@@ -16,7 +23,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	keyLabel = new QLabel(tr("Your private key:"));
 	csrLabel = new QLabel(tr("Your certificate signing request:"));
 
-	/* Controls */
+	/* Controls 
 	countryField = new QLineEdit;
 	stateField = new QLineEdit;
 	localityField = new QLineEdit;
@@ -29,7 +36,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	generateCsrButton = new QPushButton(tr("Generate CSR"));
 	quitButton = new QPushButton(tr("Quit"));
 
-	/* Set up controls and labels */
+	/* Set up controls and labels 
 	keySizeSelector->addItem("1024");
 	keySizeSelector->addItem("2048");
 	keySizeSelector->addItem("3072");
@@ -52,7 +59,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	csrField->setMinimumHeight(450);
 	csrField->setReadOnly(true);
 
-	/* Group controls and labels into layouts*/
+	/* Group controls and labels into layouts
 	QHBoxLayout* countryLayout = new QHBoxLayout;
 	countryLayout->addWidget(countryLabel);
 	countryLayout->addWidget(countryField);
@@ -105,18 +112,19 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	QVBoxLayout* csrLayout = new QVBoxLayout;
 	csrLayout->addWidget(csrLabel);
 	csrLayout->addWidget(csrField);
-	csrLayout->addLayout(buttonsLayout);
+	csrLayout->addLayout(buttonsLayout); */
 
 	QHBoxLayout* mainLayout = new QHBoxLayout;
-	mainLayout->addLayout(metaFieldsLayout);
-	mainLayout->addLayout(privateKeyLayout);
-	mainLayout->addLayout(csrLayout);
+	//mainLayout->addLayout(metaFieldsLayout);
+	//mainLayout->addLayout(privateKeyLayout);
+	//mainLayout->addLayout(csrLayout);
+	mainLayout->addWidget(tabs);
 	setLayout(mainLayout);
 
-	connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
-	connect(generateCsrButton, SIGNAL(clicked()), this, SLOT(generateKey()));
+	//connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+	//connect(generateCsrButton, SIGNAL(clicked()), this, SLOT(generateKey()));
 	//connect(keySizeSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(generateKey()));
-	setWindowTitle(tr("X509box"));
+	//setWindowTitle(tr("X509box"));
 }
 
 void mainDialog::generateKey() {
