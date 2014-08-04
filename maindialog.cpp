@@ -5,45 +5,30 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	/* Tab container */
 	tabs = new QTabWidget;
 	tabs->addTab(new dataTab(parent), tr("Certificate data"));
-	tabs->addTab(new keyTab(), tr("Private key"));
+	tabs->addTab(new keyTab(parent), tr("Private key"));
 	tabs->addTab(new csrTab(parent), tr("Signing request"));
 	tabs->addTab(new p12Tab(), tr("PFX generator"));
 
-	/* Labels 
+	/* Labels
 	keyLabel = new QLabel(tr("Your private key:"));
 	csrLabel = new QLabel(tr("Your certificate signing request:"));
 
-	/* Controls 
+	/* Controls
 
 	keyField = new QTextEdit;
 	csrField = new QTextEdit;
 	generateCsrButton = new QPushButton(tr("Generate CSR"));
 	quitButton = new QPushButton(tr("Quit"));
 
-	/* Set up controls and labels 
+	/* Set up controls and labels
 
 
 	keyLabel->setBuddy(keyField);
 	csrLabel->setBuddy(csrField);
-	keyField->setFontFamily("Courier");
-	keyField->setMinimumWidth(500);
-	keyField->setMinimumHeight(450);
-	keyField->setReadOnly(true);
-	csrField->setFontFamily("Courier");
-	csrField->setMinimumWidth(500);
-	csrField->setMinimumHeight(450);
-	csrField->setReadOnly(true);
 
-	QVBoxLayout* keyLayout = new QVBoxLayout;
-	keyLayout->addWidget(keyLabel);
-	keyLayout->addWidget(keyField);
 
 	QVBoxLayout* privateKeyLayout = new QVBoxLayout;
 	privateKeyLayout->addLayout(keyLayout);
-
-	QHBoxLayout* buttonsLayout = new QHBoxLayout;
-	buttonsLayout->addWidget(generateCsrButton);
-	buttonsLayout->addWidget(quitButton);
 
 	QVBoxLayout* csrLayout = new QVBoxLayout;
 	csrLayout->addWidget(csrLabel);

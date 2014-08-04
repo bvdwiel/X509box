@@ -13,9 +13,9 @@ csrTab::csrTab (QWidget* parent) {
 	csrField->setReadOnly(true);
 
 	/* Arrange widgets into layouts */
-    QVBoxLayout* keyLayout = new QVBoxLayout;
-	keyLayout->addWidget(csrLabel);
-	keyLayout->addWidget(csrField);
-    keyLayout->addWidget(generateCsrButton);
-    setLayout(keyLayout);
+    QVBoxLayout* csrLayout = new QVBoxLayout;
+	csrLayout->addWidget(csrLabel);
+	csrLayout->addWidget(csrField);
+    csrLayout->addWidget(generateCsrButton);
+    setLayout(csrLayout);
 }
