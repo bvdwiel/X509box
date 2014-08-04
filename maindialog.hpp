@@ -28,7 +28,6 @@ class mainDialog : public QDialog {
 public:
 	mainDialog(QWidget* parent = 0);
 private slots:
-	void generateKey();
 private:
 	QLabel* keyLabel;
 	QTextEdit* keyField;
