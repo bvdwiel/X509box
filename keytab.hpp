@@ -8,6 +8,8 @@ class keyTab : public QWidget {
 
 public:
 	keyTab(QWidget* parent);
+private slots:
+    void saveFile();
 private:
     QLabel* keyLabel;
     QTextEdit* keyField;

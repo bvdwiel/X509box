@@ -12,6 +12,7 @@ csrTab::csrTab (QWidget* parent) {
 	csrField->setMinimumWidth(500);
 	csrField->setMinimumHeight(450);
 	csrField->setReadOnly(true);
+	saveCsrButton->setEnabled(false);
 
 	/* Arrange widgets into layouts */
 	QHBoxLayout* buttonsLayout = new QHBoxLayout;
@@ -23,4 +24,26 @@ csrTab::csrTab (QWidget* parent) {
 	csrLayout->addWidget(csrField);
     csrLayout->addLayout(buttonsLayout);
     setLayout(csrLayout);
+
+    /* Signal/slot collections */
+    connect(saveCsrButton, SIGNAL(clicked()), this, SLOT(saveFile()));
+}
+
+void csrTab::saveFile() {
+    QString fileName = QFileDialog::getSaveFileName(this,
+         tr("Save Certificate Signing Request"), "",
+         tr("Certificate Signing Request (*.txt);;All files (*)"));
+    if (fileName.isEmpty()) {
+        return;
+    }
+    else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::warning(this, tr("Unable to open file"),
+            file.errorString());
+            return;
+        }
+        QTextStream out(&file);
+        out << csrField->toPlainText();
+    }
 }
