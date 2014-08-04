@@ -7,7 +7,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	tabs->addTab(new dataTab(parent), tr("Certificate data"));
 	tabs->addTab(new keyTab(parent), tr("Private key"));
 	tabs->addTab(new csrTab(parent), tr("Signing request"));
-	tabs->addTab(new p12Tab(), tr("PFX generator"));
+	tabs->addTab(new p12Tab(parent), tr("PFX generator"));
 
 	/* Labels
 	keyLabel = new QLabel(tr("Your private key:"));
