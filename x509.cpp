@@ -21,8 +21,8 @@ std::string X509::generateCSR() {
 }
 
 std::string X509::generateCSR(OID* oid) {
-	if ( this->privateKey.size() < 1024 ) {
-		throw ( "FATAL ERROR: A CSR cannot exist without a valid private key. Generate one first." );
+	if ( this->privateKey.size() < 2048 ) {
+		throw ( "FATAL ERROR: A private key must be at least 2048 bits in size." );
 	}
 	if ( oid == NULL ) {
 		throw ( "FATAL ERROR: Your CSR's OID wasn't set at creation. This is a bug. Please alert author." );
