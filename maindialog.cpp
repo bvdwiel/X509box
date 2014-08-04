@@ -1,8 +1,5 @@
-#include <QtWidgets>
-#include <iostream>
-#include <string>
+
 #include "maindialog.hpp"
-#include "x509.hpp"
 
 mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	/* Tab container */

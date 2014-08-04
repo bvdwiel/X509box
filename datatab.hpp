@@ -1,11 +1,7 @@
 #ifndef DATATAB_H
 #define DATATAB_H
 
-#include <QComboBox>
-#include <QDialog>
-#include <QLabel>
-#include <QLayout>
-#include <QLineEdit>
+#include <QtWidgets>
 
 class QComboBox;
 class QLabel;

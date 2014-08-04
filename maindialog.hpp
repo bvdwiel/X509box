@@ -5,7 +5,11 @@
 #ifndef MAINDIALOG_H
 #define MAINDIALOG_H
 
+#include <QtWidgets>
+#include <iostream>
+#include <string>
 #include <QDialog>
+#include "x509.hpp"
 #include "datatab.hpp"
 
 class QComboBox;
