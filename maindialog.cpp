@@ -22,12 +22,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 
 	/* Set up controls and labels 
 
-	countryLabel->setBuddy(countryField);
-	stateLabel->setBuddy(stateField);
-	localityLabel->setBuddy(localityField);
-	organizationLabel->setBuddy(organizationField);
-	commonNameLabel->setBuddy(commonNameField);
-	keySizeLabel->setBuddy(keySizeSelector);
+
 	keyLabel->setBuddy(keyField);
 	csrLabel->setBuddy(csrField);
 	keyField->setFontFamily("Courier");

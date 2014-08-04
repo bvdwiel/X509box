@@ -22,6 +22,12 @@ dataTab::dataTab(QWidget* parent) {
 	keySizeSelector->addItem("3072");
 	keySizeSelector->addItem("4096");
 	keySizeSelector->addItem("8192");
+	countryLabel->setBuddy(countryField);
+	stateLabel->setBuddy(stateField);
+	localityLabel->setBuddy(localityField);
+	organizationLabel->setBuddy(organizationField);
+	commonNameLabel->setBuddy(commonNameField);
+	keySizeLabel->setBuddy(keySizeSelector);
 
 	/* Group controls and labels into layouts */
 	QHBoxLayout* countryLayout = new QHBoxLayout;
