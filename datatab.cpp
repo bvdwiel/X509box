@@ -16,6 +16,13 @@ dataTab::dataTab(QWidget* parent) {
 	commonNameField = new QLineEdit;
 	keySizeSelector = new QComboBox;
 
+	/* Configure controls */
+	keySizeSelector->addItem("1024");
+	keySizeSelector->addItem("2048");
+	keySizeSelector->addItem("3072");
+	keySizeSelector->addItem("4096");
+	keySizeSelector->addItem("8192");
+
 	/* Group controls and labels into layouts */
 	QHBoxLayout* countryLayout = new QHBoxLayout;
 	countryLayout->addWidget(countryLabel);

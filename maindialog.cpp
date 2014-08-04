@@ -21,11 +21,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	quitButton = new QPushButton(tr("Quit"));
 
 	/* Set up controls and labels 
-	keySizeSelector->addItem("1024");
-	keySizeSelector->addItem("2048");
-	keySizeSelector->addItem("3072");
-	keySizeSelector->addItem("4096");
-	keySizeSelector->addItem("8192");
+
 	countryLabel->setBuddy(countryField);
 	stateLabel->setBuddy(stateField);
 	localityLabel->setBuddy(localityField);
