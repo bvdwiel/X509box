@@ -13,6 +13,7 @@
 #include "csrtab.hpp"
 #include "datatab.hpp"
 #include "keytab.hpp"
+#include "p12tab.hpp"
 
 class QComboBox;
 class QLabel;
@@ -20,10 +21,6 @@ class QLineEdit;
 class QTabWidget;
 class QTextEdit;
 class QPushButton;
-
-class p12Tab : public QWidget {
-	Q_OBJECT
-};
 
 class mainDialog : public QDialog {
 	Q_OBJECT
