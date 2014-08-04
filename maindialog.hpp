@@ -18,7 +18,22 @@ class dataTab : public QWidget {
 	Q_OBJECT
 
 public:
-	//dataTab();
+	dataTab(QWidget* parent);
+private:
+	QLabel* countryLabel;
+	QLineEdit* countryField;
+	QLabel* stateLabel;
+	QLineEdit* stateField;
+	QLabel* localityLabel;
+	QLineEdit* localityField;
+	QLabel* organizationLabel;
+	QLineEdit* organizationField;
+	QLabel* organizationalUnitLabel;
+	QLineEdit* organizationalUnitField;
+	QLabel* commonNameLabel;
+	QLineEdit* commonNameField;
+	QLabel* keySizeLabel;
+	QComboBox* keySizeSelector;
 };
 
 class keyTab : public QWidget {
@@ -41,20 +56,6 @@ public:
 private slots:
 	void generateKey();
 private:
-	QLabel* countryLabel;
-	QLineEdit* countryField;
-	QLabel* stateLabel;
-	QLineEdit* stateField;
-	QLabel* localityLabel;
-	QLineEdit* localityField;
-	QLabel* organizationLabel;
-	QLineEdit* organizationField;
-	QLabel* organizationalUnitLabel;
-	QLineEdit* organizationalUnitField;
-	QLabel* commonNameLabel;
-	QLineEdit* commonNameField;
-	QLabel* keySizeLabel;
-	QComboBox* keySizeSelector;
 	QLabel* keyLabel;
 	QTextEdit* keyField;
 	QLabel* csrLabel;
