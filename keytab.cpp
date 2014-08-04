@@ -3,6 +3,8 @@
 keyTab::keyTab(QWidget* parent) {
     keyField = new QTextEdit();
     keyLabel = new QLabel(tr("Your private key:"));
+    generateKeyButton = new QPushButton(tr("Generate key"));
+    saveKeyButton = new QPushButton(tr("Save key"));
 
     /* Configure controls */
 	keyField->setFontFamily("Courier");
@@ -11,9 +13,13 @@ keyTab::keyTab(QWidget* parent) {
 	keyField->setReadOnly(true);
 
     /* Arrange widgets into layouts */
+    QHBoxLayout* buttonsLayout = new QHBoxLayout;
+    buttonsLayout->addWidget(generateKeyButton);
+    buttonsLayout->addWidget(saveKeyButton);
+
     QVBoxLayout* keyLayout = new QVBoxLayout;
 	keyLayout->addWidget(keyLabel);
 	keyLayout->addWidget(keyField);
-    //keyLayout->addWidget(generateCsrButton);
+    keyLayout->addLayout(buttonsLayout);
     setLayout(keyLayout);
 }

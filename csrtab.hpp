@@ -11,6 +11,7 @@ private:
 	QLabel* csrLabel;
 	QTextEdit* csrField;
 	QPushButton* generateCsrButton;
+	QPushButton* saveCsrButton;
 };
 
 #endif /*CSRTAB*/

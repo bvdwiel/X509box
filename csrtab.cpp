@@ -5,6 +5,7 @@ csrTab::csrTab (QWidget* parent) {
 	csrLabel = new QLabel(tr("Your certificate signing request (CSR):"));
 	csrField = new QTextEdit();
 	generateCsrButton = new QPushButton(tr("Generate CSR"));
+	saveCsrButton = new QPushButton(tr("Save CSR"));
 
 	/* Configure controls */
     csrField->setFontFamily("Courier");
@@ -13,9 +14,13 @@ csrTab::csrTab (QWidget* parent) {
 	csrField->setReadOnly(true);
 
 	/* Arrange widgets into layouts */
+	QHBoxLayout* buttonsLayout = new QHBoxLayout;
+	buttonsLayout->addWidget(generateCsrButton);
+	buttonsLayout->addWidget(saveCsrButton);
+
     QVBoxLayout* csrLayout = new QVBoxLayout;
 	csrLayout->addWidget(csrLabel);
 	csrLayout->addWidget(csrField);
-    csrLayout->addWidget(generateCsrButton);
+    csrLayout->addLayout(buttonsLayout);
     setLayout(csrLayout);
 }

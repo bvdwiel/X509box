@@ -11,6 +11,8 @@ public:
 private:
     QLabel* keyLabel;
     QTextEdit* keyField;
+    QPushButton* generateKeyButton;
+    QPushButton* saveKeyButton;
 };
 
 #endif /*KEYTAB_H*/
