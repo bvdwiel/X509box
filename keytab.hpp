@@ -2,6 +2,7 @@
 #define KEYTAB_H
 
 #include <QtWidgets>
+#include "x509.hpp"
 
 class keyTab : public QWidget {
 	Q_OBJECT
@@ -9,6 +10,7 @@ class keyTab : public QWidget {
 public:
 	keyTab(QWidget* parent);
 private slots:
+    void generateKey();
     void saveFile();
 private:
     QLabel* keyLabel;

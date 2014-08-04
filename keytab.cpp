@@ -25,6 +25,7 @@ keyTab::keyTab(QWidget* parent) {
     setLayout(keyLayout);
 
     /* Signal/slot collections */
+    connect(generateKeyButton, SIGNAL(clicked()), this, SLOT(generateKey()));
     connect(saveKeyButton, SIGNAL(clicked()), this, SLOT(saveFile()));
 }
 
@@ -32,4 +33,13 @@ void keyTab::saveFile() {
     QString fileName = QFileDialog::getSaveFileName(this,
          tr("RSA private key"), "",
          tr("RSA private key (*.txt);;All files (*)"));
+}
+
+/* TODO: This function should call a much more centralized X509 to actually work later! */
+void keyTab::generateKey() {
+    X509* crypto = new X509();
+    QString keyData = QString::fromUtf8(crypto->generatePrivateKey().c_str());
+    keyField->setText(keyData);
+    saveKeyButton->setEnabled(true);
+    delete crypto;
 }
