@@ -17,7 +17,6 @@ dataTab::dataTab(QWidget* parent) {
 	keySizeSelector = new QComboBox;
 
 	/* Configure controls */
-	keySizeSelector->addItem("1024");
 	keySizeSelector->addItem("2048");
 	keySizeSelector->addItem("3072");
 	keySizeSelector->addItem("4096");
