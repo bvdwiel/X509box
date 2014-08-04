@@ -10,6 +10,7 @@
 #include <string>
 #include <QDialog>
 #include "x509.hpp"
+#include "csrtab.hpp"
 #include "datatab.hpp"
 #include "keytab.hpp"
 
@@ -19,10 +20,6 @@ class QLineEdit;
 class QTabWidget;
 class QTextEdit;
 class QPushButton;
-
-class csrTab : public QWidget {
-	Q_OBJECT
-};
 
 class p12Tab : public QWidget {
 	Q_OBJECT
@@ -38,10 +35,7 @@ private slots:
 private:
 	QLabel* keyLabel;
 	QTextEdit* keyField;
-	QLabel* csrLabel;
-	QTextEdit* csrField;
 	QTabWidget* tabs;
-	QPushButton* generateCsrButton;
 	QPushButton* quitButton;
 };
 
