@@ -11,6 +11,7 @@
 #include <QDialog>
 #include "x509.hpp"
 #include "datatab.hpp"
+#include "keytab.hpp"
 
 class QComboBox;
 class QLabel;
@@ -18,10 +19,6 @@ class QLineEdit;
 class QTabWidget;
 class QTextEdit;
 class QPushButton;
-
-class keyTab : public QWidget {
-	Q_OBJECT
-};
 
 class csrTab : public QWidget {
 	Q_OBJECT
