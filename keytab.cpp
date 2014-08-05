@@ -31,8 +31,21 @@ keyTab::keyTab(QWidget* parent) {
 
 void keyTab::saveFile() {
     QString fileName = QFileDialog::getSaveFileName(this,
-         tr("RSA private key"), "",
+         tr("Save RSA private key"), "",
          tr("RSA private key (*.txt);;All files (*)"));
+    if (fileName.isEmpty()) {
+        return;
+    }
+    else {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::warning(this, tr("Unable to open file"),
+            file.errorString());
+            return;
+        }
+        QTextStream out(&file);
+        out << keyField->toPlainText();
+    }
 }
 
 /* TODO: This function should call a much more centralized X509 to actually work later! */
