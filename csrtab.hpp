@@ -3,11 +3,14 @@
 
 #include <QtWidgets>
 #include <QFileDialog>
+#include "x509.hpp"
+
+class mainDialog;
 
 class csrTab : public QWidget {
 	Q_OBJECT
 public:
-	csrTab(QWidget* parent);
+	csrTab(mainDialog* parent);
 private slots:
     void saveFile();
 private:
@@ -15,6 +18,7 @@ private:
 	QTextEdit* csrField;
 	QPushButton* generateCsrButton;
 	QPushButton* saveCsrButton;
+	X509* myCrypto;
 };
 
 #endif /*CSRTAB*/

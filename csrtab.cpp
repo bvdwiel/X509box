@@ -1,14 +1,15 @@
 #include "csrtab.hpp"
+#include "maindialog.hpp"
 
-csrTab::csrTab (QWidget* parent) {
-    /* Initialize controls */
+csrTab::csrTab (mainDialog* parent) {
+	/* Initialize controls */
 	csrLabel = new QLabel(tr("Your certificate signing request (CSR):"));
 	csrField = new QTextEdit();
 	generateCsrButton = new QPushButton(tr("Generate CSR"));
 	saveCsrButton = new QPushButton(tr("Save CSR"));
 
 	/* Configure controls */
-    csrField->setFontFamily("Courier");
+	csrField->setFontFamily("Courier");
 	csrField->setMinimumWidth(500);
 	csrField->setMinimumHeight(450);
 	csrField->setReadOnly(true);
@@ -19,14 +20,16 @@ csrTab::csrTab (QWidget* parent) {
 	buttonsLayout->addWidget(generateCsrButton);
 	buttonsLayout->addWidget(saveCsrButton);
 
-    QVBoxLayout* csrLayout = new QVBoxLayout;
+	QVBoxLayout* csrLayout = new QVBoxLayout;
 	csrLayout->addWidget(csrLabel);
 	csrLayout->addWidget(csrField);
-    csrLayout->addLayout(buttonsLayout);
-    setLayout(csrLayout);
+	csrLayout->addLayout(buttonsLayout);
+	setLayout(csrLayout);
 
-    /* Signal/slot collections */
-    connect(saveCsrButton, SIGNAL(clicked()), this, SLOT(saveFile()));
+	/* Signal/slot collections */
+	connect(saveCsrButton, SIGNAL(clicked()), this, SLOT(saveFile()));
+
+	myCrypto = parent->crypto;
 }
 
 void csrTab::saveFile() {
