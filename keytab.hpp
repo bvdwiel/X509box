@@ -1,6 +1,7 @@
 #ifndef KEYTAB_H
 #define KEYTAB_H
 
+#include <exception>
 #include <QtWidgets>
 #include "x509.hpp"
 

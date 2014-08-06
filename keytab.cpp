@@ -52,7 +52,11 @@ void keyTab::saveFile() {
 }
 
 void keyTab::generateKey() {
-    QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey().c_str());
-    keyField->setText(keyData);
-    saveKeyButton->setEnabled(true);
+	try {
+		QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey().c_str());
+		keyField->setText(keyData);
+		saveKeyButton->setEnabled(true); }
+	catch(const char* e) {
+		QMessageBox::critical(this, tr("Error"), e);
+	}
 }
