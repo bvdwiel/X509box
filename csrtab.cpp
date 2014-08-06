@@ -43,7 +43,7 @@ void csrTab::saveFile() {
     else {
         QFile file(fileName);
         if (!file.open(QIODevice::WriteOnly)) {
-            QMessageBox::warning(this, tr("Unable to open file"),
+            QMessageBox::critical(this, tr("Unable to open file"),
             file.errorString());
             return;
         }
@@ -59,6 +59,5 @@ void csrTab::generateCsr() {
 	saveCsrButton->setEnabled(true);}
 	catch(const char* e) {
 		QMessageBox::warning(this, tr("Error"), e);
-		myCrypto->debug();
 	}
 }
