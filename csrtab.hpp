@@ -4,6 +4,7 @@
 #include <exception>
 #include <QtWidgets>
 #include <QFileDialog>
+#include "oid.hpp"
 #include "x509.hpp"
 
 class mainDialog;
@@ -20,6 +21,7 @@ private:
 	QTextEdit* csrField;
 	QPushButton* generateCsrButton;
 	QPushButton* saveCsrButton;
+	OID* myOid;
 	X509* myCrypto;
 };
 

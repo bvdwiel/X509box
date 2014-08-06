@@ -69,5 +69,52 @@ dataTab::dataTab(mainDialog* parent) {
 	metaFieldsLayout->addStretch();
 	setLayout(metaFieldsLayout);
 
+	/* Variables */
 	myCrypto = parent->crypto;
+	myOid = parent->oid;
+
+	/* Signal/slot-connections */
+	connect(countryField, SIGNAL(editingFinished()), this, SLOT(setCountry()));
+	connect(stateField, SIGNAL(editingFinished()), this, SLOT(setState()));
+	connect(localityField, SIGNAL(editingFinished()), this, SLOT(setLocality()));
+	connect(organizationField, SIGNAL(editingFinished()), this, SLOT(setOrganization()));
+	connect(organizationalUnitField, SIGNAL(editingFinished()), this, SLOT(setOrganizationalUnit()));
+	connect(commonNameField, SIGNAL(editingFinished()), this, SLOT(setCommonName()));
 }
+
+void dataTab::setCountry() {
+	std::string countryName;
+	countryName = countryField->text().toStdString();
+	myOid->setCountryName(countryName);
+}
+
+void dataTab::setState() {
+	std::string stateName;
+	stateName = stateField->text().toStdString();
+	myOid->setStateOrProvinceName(stateName);
+}
+
+void dataTab::setLocality() {
+	std::string localityString;
+	localityString = localityField->text().toStdString();
+	myOid->setLocalityName(localityString);
+}
+
+void dataTab::setOrganization() {
+	std::string organizationName;
+	organizationName = organizationField->text().toStdString();
+	myOid->setOrganizationName(organizationName);
+}
+
+void dataTab::setOrganizationalUnit() {
+	std::string organizationalUnitName;
+	organizationalUnitName = organizationalUnitField->text().toStdString();
+	myOid->setOrganizationalUnitName(organizationalUnitName);
+}
+
+void dataTab::setCommonName() {
+	std::string commonName;
+	commonName = commonNameField->text().toStdString();
+	myOid->setCommonName(commonName);
+}
+

@@ -30,6 +30,7 @@ csrTab::csrTab (mainDialog* parent) {
 	connect(saveCsrButton, SIGNAL(clicked()), this, SLOT(saveFile()));
 	connect(generateCsrButton, SIGNAL(clicked()), this, SLOT(generateCsr()));
 
+	myOid = parent->oid;
 	myCrypto = parent->crypto;
 }
 
@@ -53,8 +54,9 @@ void csrTab::saveFile() {
 }
 
 void csrTab::generateCsr() {
+	myOid->debug();
 	try {
-	QString csrData = QString::fromUtf8(myCrypto->generateCSR().c_str());
+	QString csrData = QString::fromUtf8(myCrypto->generateCSR(myOid).c_str());
 	csrField->setText(csrData);
 	saveCsrButton->setEnabled(true);}
 	catch(const char* e) {

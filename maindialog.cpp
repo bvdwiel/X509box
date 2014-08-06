@@ -3,6 +3,7 @@
 
 mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	crypto = new X509;
+	oid = new OID;
 	/* Tab container */
 	tabs = new QTabWidget;
 	tabs->addTab(new dataTab(this), tr("Certificate data"));

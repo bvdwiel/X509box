@@ -2,8 +2,10 @@
 #define DATATAB_H
 
 #include <exception>
+#include <string>
 #include <QtWidgets>
 #include "x509.hpp"
+#include "oid.hpp"
 
 class QComboBox;
 class QLabel;
@@ -19,6 +21,13 @@ class dataTab : public QWidget {
 
 public:
 	dataTab(mainDialog* parent);
+private slots:
+	void setCountry();
+	void setState();
+	void setLocality();
+	void setOrganization();
+	void setOrganizationalUnit();
+	void setCommonName();
 private:
 	QLabel* countryLabel;
 	QLineEdit* countryField;
@@ -35,6 +44,7 @@ private:
 	QLabel* keySizeLabel;
 	QComboBox* keySizeSelector;
 	X509* myCrypto;
+	OID* myOid;
 };
 
 #endif /*DATATAB_H*/

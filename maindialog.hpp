@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <QDialog>
+#include "oid.hpp"
 #include "x509.hpp"
 #include "csrtab.hpp"
 #include "datatab.hpp"
@@ -28,6 +29,7 @@ class mainDialog : public QDialog {
 public:
 	mainDialog(QWidget* parent = 0);
 	X509* crypto;
+	OID* oid;
 private slots:
 private:
 	QLabel* keyLabel;
