@@ -21,6 +21,9 @@ std::string X509::generateCSR() {
 }
 
 std::string X509::generateCSR(OID* oid) {
+	if ( this->privateKey.size() == 0) {
+		throw ( "Private key not present. Please generate it first." );
+	}
 	if ( this->privateKey.size() < 1674 ) { // 1674 is a magic number. PEM-encoded 2048-bit keys report back 1675 for .size().
 		throw ( "FATAL ERROR: A private key must be at least 2048 bits in size." );
 	}
