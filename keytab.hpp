@@ -4,11 +4,13 @@
 #include <QtWidgets>
 #include "x509.hpp"
 
+class mainDialog;
+
 class keyTab : public QWidget {
 	Q_OBJECT
 
 public:
-	keyTab(QWidget* parent);
+	keyTab(mainDialog* parent);
 private slots:
     void generateKey();
     void saveFile();
@@ -17,6 +19,7 @@ private:
     QTextEdit* keyField;
     QPushButton* generateKeyButton;
     QPushButton* saveKeyButton;
+    X509* myCrypto;
 };
 
 #endif /*KEYTAB_H*/

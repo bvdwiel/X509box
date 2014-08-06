@@ -27,6 +27,7 @@ class mainDialog : public QDialog {
 
 public:
 	mainDialog(QWidget* parent = 0);
+	X509* crypto;
 private slots:
 private:
 	QLabel* keyLabel;

@@ -1,6 +1,7 @@
 #include "keytab.hpp"
+#include "maindialog.hpp"
 
-keyTab::keyTab(QWidget* parent) {
+keyTab::keyTab(mainDialog* parent) {
     keyField = new QTextEdit();
     keyLabel = new QLabel(tr("Your private key:"));
     generateKeyButton = new QPushButton(tr("Generate key"));
@@ -27,6 +28,8 @@ keyTab::keyTab(QWidget* parent) {
     /* Signal/slot collections */
     connect(generateKeyButton, SIGNAL(clicked()), this, SLOT(generateKey()));
     connect(saveKeyButton, SIGNAL(clicked()), this, SLOT(saveFile()));
+
+	myCrypto = parent->crypto;
 }
 
 void keyTab::saveFile() {
@@ -48,11 +51,8 @@ void keyTab::saveFile() {
     }
 }
 
-/* TODO: This function should call a much more centralized X509 to actually work later! */
 void keyTab::generateKey() {
-    X509* crypto = new X509();
-    QString keyData = QString::fromUtf8(crypto->generatePrivateKey().c_str());
+    QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey().c_str());
     keyField->setText(keyData);
     saveKeyButton->setEnabled(true);
-    delete crypto;
 }
