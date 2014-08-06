@@ -54,7 +54,6 @@ void csrTab::saveFile() {
 }
 
 void csrTab::generateCsr() {
-	myOid->debug();
 	try {
 	QString csrData = QString::fromUtf8(myCrypto->generateCSR(myOid).c_str());
 	csrField->setText(csrData);
