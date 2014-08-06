@@ -1,6 +1,7 @@
 #ifndef CSRTAB_H
 #define CSRTAB_H
 
+#include <exception>
 #include <QtWidgets>
 #include <QFileDialog>
 #include "x509.hpp"
@@ -12,7 +13,8 @@ class csrTab : public QWidget {
 public:
 	csrTab(mainDialog* parent);
 private slots:
-    void saveFile();
+	void saveFile();
+	void generateCsr();
 private:
 	QLabel* csrLabel;
 	QTextEdit* csrField;

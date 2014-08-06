@@ -28,6 +28,7 @@ csrTab::csrTab (mainDialog* parent) {
 
 	/* Signal/slot collections */
 	connect(saveCsrButton, SIGNAL(clicked()), this, SLOT(saveFile()));
+	connect(generateCsrButton, SIGNAL(clicked()), this, SLOT(generateCsr()));
 
 	myCrypto = parent->crypto;
 }
@@ -49,4 +50,15 @@ void csrTab::saveFile() {
         QTextStream out(&file);
         out << csrField->toPlainText();
     }
+}
+
+void csrTab::generateCsr() {
+	try {
+	QString csrData = QString::fromUtf8(myCrypto->generateCSR().c_str());
+	csrField->setText(csrData);
+	saveCsrButton->setEnabled(true);}
+	catch(const char* e) {
+		QMessageBox::warning(this, tr("Error"), e);
+		myCrypto->debug();
+	}
 }
