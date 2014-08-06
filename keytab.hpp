@@ -3,6 +3,7 @@
 
 #include <exception>
 #include <QtWidgets>
+#include "oid.hpp"
 #include "x509.hpp"
 
 class mainDialog;
@@ -13,14 +14,15 @@ class keyTab : public QWidget {
 public:
 	keyTab(mainDialog* parent);
 private slots:
-    void generateKey();
-    void saveFile();
+	void generateKey();
+	void saveFile();
 private:
-    QLabel* keyLabel;
-    QTextEdit* keyField;
-    QPushButton* generateKeyButton;
-    QPushButton* saveKeyButton;
-    X509* myCrypto;
+	QLabel* keyLabel;
+	QTextEdit* keyField;
+	QPushButton* generateKeyButton;
+	QPushButton* saveKeyButton;
+	OID* myOid;
+	X509* myCrypto;
 };
 
 #endif /*KEYTAB_H*/

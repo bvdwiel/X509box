@@ -17,12 +17,14 @@ public:
 	std::string getOrganizationName();
 	std::string getOrganizationalUnitName();
 	std::string getCommonName();
+	unsigned int getKeySize();
 	void setCountryName(std::string countryName);
 	void setStateOrProvinceName(std::string stateOrProvinceName);
 	void setLocalityName(std::string localityName);
 	void setOrganizationName(std::string organizationName);
 	void setOrganizationalUnitName(std::string organizationalUnitName);
 	void setCommonName(std::string commonName);
+	void setKeySize(unsigned int keySize);
 	void debug();
 protected:
 	std::string countryName;
@@ -31,6 +33,7 @@ protected:
 	std::string organizationName;
 	std::string organizationalUnitName;
 	std::string commonName;
+	unsigned int keySize; // Not technically an OID value, not worth a separate class though.
 };
 
 #endif /*OID_H*/

@@ -28,6 +28,7 @@ private slots:
 	void setOrganization();
 	void setOrganizationalUnit();
 	void setCommonName();
+	void setKeySize();
 private:
 	QLabel* countryLabel;
 	QLineEdit* countryField;

@@ -80,8 +80,17 @@ dataTab::dataTab(mainDialog* parent) {
 	connect(organizationField, SIGNAL(editingFinished()), this, SLOT(setOrganization()));
 	connect(organizationalUnitField, SIGNAL(editingFinished()), this, SLOT(setOrganizationalUnit()));
 	connect(commonNameField, SIGNAL(editingFinished()), this, SLOT(setCommonName()));
+	connect(keySizeSelector, SIGNAL(currentTextChanged(QString)), this, SLOT(setKeySize()));
+
+	/* Fire off the setKeysize once to load it with a sensible default */
+	this->setKeySize();
 }
 
+void dataTab::setKeySize() {
+	unsigned int keySize;
+	keySize = keySizeSelector->currentText().toInt();
+	myOid->setKeySize(keySize);
+}
 void dataTab::setCountry() {
 	std::string countryName;
 	countryName = countryField->text().toStdString();

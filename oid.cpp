@@ -17,9 +17,14 @@ void OID::debug() {
 	std::cerr << "OrganizationName: " << this->getOrganizationName() << std::endl;
 	std::cerr << "OrganizationalUnitName: " << this->getOrganizationalUnitName() << std::endl;
 	std::cerr << "CommonName: " << this->getCommonName() << std::endl;
+	std::cerr << "Key size: " << this->getKeySize() << std::endl;
 }
 
 /* Getters */
+unsigned int OID::getKeySize() {
+	return ( this->keySize );
+}
+
 std::string OID::getCountryName() {
 	return ( this->countryName );
 }
@@ -45,6 +50,10 @@ std::string OID::getCommonName() {
 }
 
 /* Setters */
+void OID::setKeySize(unsigned int keySize) {
+	this->keySize = keySize;
+}
+
 void OID::setCountryName(std::string countryName) {
 	/* No validation for now */
 	this->countryName = countryName;
