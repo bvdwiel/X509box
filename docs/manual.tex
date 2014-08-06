@@ -1,0 +1,38 @@
+\documentclass[a4paper,12pt]{article}
+\begin{document}
+\section{Introduction}
+X509box is a GUI utility for system administrators who need to generate X.509 certificates, more commonly known as SSL-certificates. These are commonly used to secure websites or e-mail servers against eavedropping by encrypting all connections. The X509box handles the creation of the cryptographic artifacts that a certification authority needs in order to issue a properly signed certifcate.
+
+In order to set up a connection secured by the SSL or TLS protocols, you need a number of items. Almost all of these items can be generated on your own workstation, except for the signed certificate itself. X509box will help you generate the following items:
+\begin{enumerate}
+\item RSA private keys
+\item Certificate signing requests
+\item PKCS \#12 certificate bundles\footnote{PKCS \#12 will be there in 1.0, it's not present in prereleases yet.}
+\end{enumerate}
+
+\subsection{RSA private key}
+The first step of an SSL connection consists of a cryptographic handshake based on the RSA cipher, a so-called public key cipher. The essential feature of this is the fact that a secure connection can be established without the need to transmit secret or confidential information in the clear. This is done through the use of a pair of mathematically related fragments of information called keys.
+
+The private key is a piece of data which the owner of the server should protect as carefully as possible. The actual encryption standard allows you to protect the private key with a password, but that's impractical for servers which run without human interaction from deep inside dark datacenters. You don't want to be present to enter the password every time your server needs to be restarted, like in the deep of night after your operating system finishes installing critical updates.
+
+If you choose not to protect your key with a password, it'll be quite vulnerable when left on your local hard drive. X509box doesn't (yet)\footnote{X509box may get a secure storage mechanism for keys in a later version. This isn't yet planned though.} provide any means to protect the generated keys in other ways. You'll need to take care of this yourself. Look into encryption solutions that protect your entire hard drive like BitLocker or LUKS. Whatever you do, it's absolutely imperative that your private keys remain just that: private. 
+
+Your protection will be completely broken once your private key gets compromised. Do not share it with anyone unless absolutely necessary. Also note that no certification authority ever needs your private key. Immediately stop conducting business with any certification authority that requests your private keys from you. Some certification authorities offer `easy' web-based services to generate everything for you in one go. Don't ever use such a service, though. It'll give the certification authority and any of its affiliates an easy and undetectable way to eavesdrop on your communications or to impersonate you flawlessly. This cannot be stressed enough: generate your private keys locally and keep them protected at all times.
+
+\subsection{Certificate signing request}
+The certificate signing request (CSR) is a fragment of data containing a bunch of metadata about your planned certificate as well as its public key. The public key is the inextricable counterpart of your private key, but it serves a completely different purpose. The public key is hosted openly on the server you intend to protect, free for all to download and use. Hence the term `public key', there's nothing secret about it.
+
+The metadata consists of fields for items like country, state, city, organization etc. These will later be used to identify your server to its users. They're intended for human readers.
+
+A certificate signing request is a combination of these metadata fields and your public key. This package is saved into a text file and sent to a certification authority for it to sign, if it decides to trust you. The CSR is closely related to the private key. If you ever lose your private key, any CSR or certificate based on it will instantly become useless. The other way around is not a problem. Any private key can be used to generate a CSR with a new set of metadata. This is, however, very bad practice. Once your certificate expires, make it a point to generate a completely new set of cryptographic artifacts for its replacement.
+
+\subsection{Signed certificate and chain}
+A signed certificate consist of your certificate signing request, being the bundle of metadata and a public key, cryptographically signed by a certification authority. A certification authority is usually an external company that receives your CSR, verifies your identity to a certain degree and attaches its seal of trust to your request. The certification authority does this by using its own private key to mathematically sign your CSR file. This signature can then be verified by anyone who has the certification authority's public key.
+
+A certification authority is usually built op from a hierarchy of authorities that sign eachother's public keys, forming a chain that cascades down from a single root all the way to your own signed certificate. Those who later connect to your system will download your certificate, figure out who signed it and attempt to verify this signature. To make this easy, your server may offer the certificate authority's public keys right along with its own all the way up to the root.
+
+A collection containing your private key, your signed certificate and any signing authorities above it, can be installed on your server separately or bundled together in PKCS \#12 files for use. Linux and UNIX servers tend to use separate files, while Windows seems to have a preference for PKCS \#12 files.
+
+\subsection{PKCS \#12 bundles}
+PKCS \#12 is a cryptographic standard that's used to bundle all manner of cryptographic artifacts together into a single file, much like a ZIP-file. X509box doesn't generate these yet, so you'll need to create them by different means. The OpenSSL toolkit is an option for this but many servers, like the ubiquitous Apache web server, work perfectly well without it.
+\end{document}
