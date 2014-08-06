@@ -1,7 +1,9 @@
 #ifndef DATATAB_H
 #define DATATAB_H
 
+#include <exception>
 #include <QtWidgets>
+#include "x509.hpp"
 
 class QComboBox;
 class QLabel;
@@ -10,11 +12,13 @@ class QTabWidget;
 class QTextEdit;
 class QPushButton;
 
+class mainDialog;
+
 class dataTab : public QWidget {
 	Q_OBJECT
 
 public:
-	dataTab(QWidget* parent);
+	dataTab(mainDialog* parent);
 private:
 	QLabel* countryLabel;
 	QLineEdit* countryField;
@@ -30,6 +34,7 @@ private:
 	QLineEdit* commonNameField;
 	QLabel* keySizeLabel;
 	QComboBox* keySizeSelector;
+	X509* myCrypto;
 };
 
 #endif /*DATATAB_H*/

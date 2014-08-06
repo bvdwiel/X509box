@@ -1,6 +1,7 @@
 #include "datatab.hpp"
+#include "maindialog.hpp"
 
-dataTab::dataTab(QWidget* parent) {
+dataTab::dataTab(mainDialog* parent) {
 	countryLabel = new QLabel(tr("Country:"));
 	stateLabel = new QLabel(tr("State or province:"));
 	localityLabel = new QLabel(tr("City or locality:"));
@@ -67,4 +68,6 @@ dataTab::dataTab(QWidget* parent) {
 	metaFieldsLayout->addLayout(keySizeLayout);
 	metaFieldsLayout->addStretch();
 	setLayout(metaFieldsLayout);
+
+	myCrypto = parent->crypto;
 }
