@@ -21,6 +21,8 @@ protected:
 	std::vector<std::string> chain;
 	std::string privateKey;
 	std::string certificate;
+
+	std::string getThumbPrint(std::string* certificate);
 };
 
 #endif /*PKCS12_H*/
