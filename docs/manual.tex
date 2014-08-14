@@ -61,7 +61,18 @@ Certificate metadata consists of a number of fields which are filled according t
 \subsection{Key size}
 The size of your cryptographic keys is measured in bits. The longer the keys in a pair are, the more difficult it will be to crack them through the use of brute force (ie. guessing). The tradeoff is in the computational complexity of actually working with these keys. The longer you make them, the harder CPU's will need to work in order to process and use them. This may be an issue between systems which require lots of short-lived connections to be encrypted between them. Longer keys introduce considerable latency in this scenario in exchange for stronger security.
 
-X509box follows common best practice by not allowing the generation of keys shorter than 2048 bits, which is also the default. The application allows you to choose sizes up to 8192 bits, which should remain secure for at least a number of decades to come. A key this long should only be used to protect secrets which absolutely require more than 20 years of protection.
+X509box follows common best practice by not allowing the generation of keys shorter than 2048 bits, which is also the default. The application allows you to choose sizes up to 8192 bits, which should remain secure for at least a number of decades to come. A key this long should only be used to protect secrets which absolutely require more than 20 years of protection\footnote{If you need X509box to protect you against three-letter agencies, you have other problems and would be well-advised to obtain a decent formal grounding in the theory and mathematics of cryptography before proceeding! X509box is just a tool. A fool with a tool is still a fool.}.
 
 For general use in ecommerce applications, the protection of e-mail and other online communications the current default will hold for years to come.
+
+\subsection{Generate private key}
+X509box's second tab allows you to generate a private key. Although it's not strictly required for a private key, you would do well to adopt the habit of first filling out the metadata fields if you intend to actually generate a CSR based on this key.
+
+The actual generation of a private key is simple, just hit the button and the text field will fill with a lot of what appears to be gibberish. This is actually your key, thouh, encoded in a format which makes it easy to handle as text. Many applications refer to this format as PEM.
+
+You could copy/paste the key from the text field if you need to enter it into some sort of interface, like a web form or graphical application. If you prefer to store it as a file, just hit the 'save' button and you'll have the key stored as a text file.
+
+Please note that if you choose not to save your key and you exit your application, any CSR you may generate later will be completely useless. The same will go for any certificates you buy based upon such a CSR. So apart from keeping the private key a secret, you also must never lose it. Certificate authorities usually do not offer a refund in case you lose your private key, so losing your private key could be a very expensive mistake to make. Once lost, a private key can --in keeping with its purpose-- never be recovered.
+
+\subsection{Generate certificate signing request}
 \end{document}
