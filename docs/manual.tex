@@ -29,10 +29,39 @@ A certificate signing request is a combination of these metadata fields and your
 \subsection{Signed certificate and chain}
 A signed certificate consist of your certificate signing request, being the bundle of metadata and a public key, cryptographically signed by a certification authority. A certification authority is usually an external company that receives your CSR, verifies your identity to a certain degree and attaches its seal of trust to your request. The certification authority does this by using its own private key to mathematically sign your CSR file. This signature can then be verified by anyone who has the certification authority's public key.
 
-A certification authority is usually built op from a hierarchy of authorities that sign eachother's public keys, forming a chain that cascades down from a single root all the way to your own signed certificate. Those who later connect to your system will download your certificate, figure out who signed it and attempt to verify this signature. To make this easy, your server may offer the certificate authority's public keys right along with its own all the way up to the root.
+A certification authority is usually built up from a hierarchy of authorities that sign eachother's public keys, forming a chain that cascades down from a single root all the way to your own signed certificate. Those who later connect to your system will download your certificate, figure out who signed it and attempt to verify this signature. To make this easy, your server may offer the certificate authority's public keys right along with its own all the way up to the root.
 
 A collection containing your private key, your signed certificate and any signing authorities above it, can be installed on your server separately or bundled together in PKCS \#12 files for use. Linux and UNIX servers tend to use separate files, while Windows seems to have a preference for PKCS \#12 files.
 
 \subsection{PKCS \#12 bundles}
 PKCS \#12 is a cryptographic standard that's used to bundle all manner of cryptographic artifacts together into a single file, much like a ZIP-file. X509box doesn't generate these yet, so you'll need to create them by different means. The OpenSSL toolkit is an option for this but many servers, like the ubiquitous Apache web server, work perfectly well without it.
+
+\section{Using X509box}
+X509box is currently only useful in the preparation stage of generating an X509 certificate. This process consists of a number of discrete steps.
+
+\begin{enumerate}
+\item Enter your certificate's metadata;
+\item Choose a size for your keys;
+\item Generate a private key;
+\item Generate a certificate signing request (including a public key);
+\end{enumerate}
+
+\subsection{Certificate metadata}
+Certificate metadata consists of a number of fields which are filled according to a set of conventions. X509box allows you to set the following common set of fields, which are the most common fields present in certificates, on its first tab\footnote{The current prerelease version writes dummy information to the CSR if you don't modify each of them at least once, even if it's just to empty them again. This is a bug, since as a feature it's now been documented.}. These fields are intended to reflect the certificate holder's identity, be it personal or organizational or a mixture of both.
+
+\begin{description}
+\item[Country]The country contains the ISO language code of the certified entity's country. Most certification authorities only sign if they can verify that the entity's current legal country of residence matches with the information in this field.
+\item[State or province]The state or province field contains a geographic designation which may obviously contain items like state or province but interpretation is liberal enough for use with counties, districts, départements or other geographical groupings between a city and a country.
+\item[City or locality]This contains your current city or municipality of legal residence.
+\item[Organization]Contains the formal name of your organization exactly as it's legally registered. Certification authorities check this extremely carefully. The slightest difference in punctuation and capitalization may well be reason not to process your certificate signing request.
+\item[Organizational unit]The organizational unit is a field for your internal use. You're welcome to fill it with the name of your department, or of the department responsible for the service which uses the certificate.
+\item[Hostname or common name]For server this is usually the fully qualified domain name as registered in DNS. This field is also often used to store a person's e-mail address for S/MIME e-mail encryption.
+\end{description}
+
+\subsection{Key size}
+The size of your cryptographic keys is measured in bits. The longer the keys in a pair are, the more difficult it will be to crack them through the use of brute force (ie. guessing). The tradeoff is in the computational complexity of actually working with these keys. The longer you make them, the harder CPU's will need to work in order to process and use them. This may be an issue between systems which require lots of short-lived connections to be encrypted between them. Longer keys introduce considerable latency in this scenario in exchange for stronger security.
+
+X509box follows common best practice by not allowing the generation of keys shorter than 2048 bits, which is also the default. The application allows you to choose sizes up to 8192 bits, which should remain secure for at least a number of decades to come. A key this long should only be used to protect secrets which absolutely require more than 20 years of protection.
+
+For general use in ecommerce applications, the protection of e-mail and other online communications the current default will hold for years to come.
 \end{document}
