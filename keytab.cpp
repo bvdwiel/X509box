@@ -33,6 +33,11 @@ keyTab::keyTab(mainDialog* parent) {
 	myOid = parent->oid;
 }
 
+keyTab::~keyTab() {
+	delete myCrypto;
+	delete myOid;
+}
+
 void keyTab::saveFile() {
     QString fileName = QFileDialog::getSaveFileName(this,
          tr("Save RSA private key"), "",

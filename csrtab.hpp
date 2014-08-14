@@ -13,6 +13,7 @@ class csrTab : public QWidget {
 	Q_OBJECT
 public:
 	csrTab(mainDialog* parent);
+	~csrTab();
 private slots:
 	void saveFile();
 	void generateCsr();

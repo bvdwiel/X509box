@@ -13,6 +13,7 @@ class keyTab : public QWidget {
 
 public:
 	keyTab(mainDialog* parent);
+	~keyTab();
 private slots:
 	void generateKey();
 	void saveFile();

@@ -21,6 +21,7 @@ class dataTab : public QWidget {
 
 public:
 	dataTab(mainDialog* parent);
+	~dataTab();
 private slots:
 	void setCountry();
 	void setState();

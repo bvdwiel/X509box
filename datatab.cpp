@@ -86,6 +86,11 @@ dataTab::dataTab(mainDialog* parent) {
 	this->setKeySize();
 }
 
+dataTab::~dataTab() {
+	delete myCrypto;
+	delete myOid;
+}
+
 void dataTab::setKeySize() {
 	unsigned int keySize;
 	keySize = keySizeSelector->currentText().toInt();

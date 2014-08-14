@@ -34,6 +34,11 @@ csrTab::csrTab (mainDialog* parent) {
 	myCrypto = parent->crypto;
 }
 
+csrTab::~csrTab() {
+	delete myOid;
+	delete myCrypto;
+}
+
 void csrTab::saveFile() {
     QString fileName = QFileDialog::getSaveFileName(this,
          tr("Save Certificate Signing Request"), "",
