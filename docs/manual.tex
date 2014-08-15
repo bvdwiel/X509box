@@ -1,5 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \begin{document}
+\title{X509box -- the manual}
+\maketitle
 \section{Introduction}
 X509box is a GUI utility for system administrators who need to generate X.509 certificates, more commonly known as SSL-certificates. These are commonly used to secure websites or e-mail servers against eavedropping by encrypting all connections. The X509box handles the creation of the cryptographic artifacts that a certification authority needs in order to issue a properly signed certifcate.
 
@@ -75,4 +77,9 @@ You could copy/paste the key from the text field if you need to enter it into so
 Please note that if you choose not to save your key and you exit your application, any CSR you may generate later will be completely useless. The same will go for any certificates you buy based upon such a CSR. So apart from keeping the private key a secret, you also must never lose it. Certificate authorities usually do not offer a refund in case you lose your private key, so losing your private key could be a very expensive mistake to make. Once lost, a private key can --in keeping with its purpose-- never be recovered.
 
 \subsection{Generate certificate signing request}
+Generating a proper certificate signing request (CSR) requires that you enter valid metadata on the first tab and generate a private key on the second. Once that's done, you can just hit the button to generate a CSR. The tab works much the same as the private key tab. You generate the CSR, which will then be displayed in the text field above the button. This is so you can copy/paste the text into another running application. Or you can hit the 'save' button to write the CSR to a file on disk.
+
+The CSR is the item you send off to a certification authority for signing. Even though the private key and the CSR may appear very similar at first glance, note the first and last lines of text in each of them. The CSR refers to a signing request while the private key also identifies itself as such. Make absolutely certain that you never send out a private key to the certification authority, or to any third-party for that matter.
+
+After your certification authority processes your CSR, you could keep it for when the certificate expires. Using the same combination of CSR and private key is a quick way to get a similar certificate with a renewed period of validity. This is bad practice, though, because it leaves private keys in the same place for very long periods of time. A certificate does not expire without good reason, so when the time comes to renew it you should do so based on a newly generated private key and its corresponding new CSR.
 \end{document}
