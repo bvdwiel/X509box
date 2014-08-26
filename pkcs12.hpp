@@ -13,7 +13,7 @@ class pkcs12 {
 public:
 	pkcs12();
 	~pkcs12();
-	void addChainCertificate(std::string certificate);
+	int addChainCertificate(std::string certificate);
 	void removeChainCertificate(std::string thumbPrint);
 	void addPrivateKey(std::string privateKey);
 	void addCertificate(std::string certificate);
