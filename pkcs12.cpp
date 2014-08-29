@@ -10,7 +10,8 @@ pkcs12::~pkcs12() {
 	gnutls_pkcs12_deinit(pfx);
 }
 
-void pkcs12::addChainCertificate(std::string certificate) {
+int pkcs12::addChainCertificate(std::string certificate) {
+	int res = 0;
 	gnutls_x509_crt_t cert;
 	gnutls_x509_crt_init(&cert);
 	gnutls_datum_t pemdata;
@@ -18,11 +19,17 @@ void pkcs12::addChainCertificate(std::string certificate) {
 	//Load PEM certificate into GNUTLS data structures
 	pemdata.size = certificate.size();
 	pemdata.data = (unsigned char*)certificate.c_str();
-	gnutls_x509_crt_import(cert, &pemdata, GNUTLS_X509_FMT_PEM);
+	if ( gnutls_x509_crt_import(cert, &pemdata, GNUTLS_X509_FMT_PEM) != 0) {
+		throw("FATAL: Failed to prepare certificate for inclusion in PFX");
+	}
 
 	//Stick the cert in the bag and clean up
-	gnutls_pkcs12_bag_set_crt(bag, cert);
+	res = gnutls_pkcs12_bag_set_crt(bag, cert);
+	if ( res < 0 ) {
+		throw("FATAL: Failed to insert certificate into PFX.");
+	}
 	gnutls_x509_crt_deinit(cert);
+	return(res);
 }
 
 void pkcs12::addPrivateKey(std::string privateKeyPEM) {
