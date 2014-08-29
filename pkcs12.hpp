@@ -19,6 +19,7 @@ public:
 	void addCertificate(std::string certificate);
 	void generateBundle();
 	void saveBundleToFile(std::string fileName);
+	std::string exportBundle(const char* format);
 protected:
 	std::vector<gnutls_datum_t*> certs;
 	std::string certificate;

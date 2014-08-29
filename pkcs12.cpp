@@ -41,6 +41,11 @@ void saveBundleToFile(std::string fileName) {
 	//NOP: Save to file here
 }
 
+std::string pkcs12::exportBundle(const char* format) {
+	std::string pemData;
+	return(pemData);
+}
+
 std::string pkcs12::getThumbPrint(std::string* certificate) {
 	return("NOP");
 }
