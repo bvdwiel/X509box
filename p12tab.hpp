@@ -7,11 +7,10 @@ class p12Tab : public QWidget {
 	Q_OBJECT
 public:
     p12Tab(QWidget* parent);
+protected:
+    QHBoxLayout* addCertificate();
 private:
-    QLabel* rootFileLabel;
-    QLineEdit* rootFileName;
-    QPushButton* rootFileBrowseButton;
-    QHBoxLayout* rootFileLayout;
+    QGroupBox* intermediateGroup;
 };
 
 #endif /*P12TAB_H*/
