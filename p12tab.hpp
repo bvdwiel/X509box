@@ -8,7 +8,10 @@ class p12Tab : public QWidget {
 public:
     p12Tab(QWidget* parent);
 private:
-    QLabel* messageLabel;
+    QLabel* rootFileLabel;
+    QLineEdit* rootFileName;
+    QPushButton* rootFileBrowseButton;
+    QHBoxLayout* rootFileLayout;
 };
 
 #endif /*P12TAB_H*/
