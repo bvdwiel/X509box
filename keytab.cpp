@@ -56,6 +56,10 @@ void keyTab::loadFile() {
             }
             QTextStream in(&file);
 	    loadedKey = in.readAll();
+            if ( myCrypto->validateRsaKey(loadedKey.toStdString()) == false ) {
+		throw("The file you opened does not contain a valid key, or the key is encrypted. X509box does not support encrypted keys.");
+            }
+            keyField->setText(loadedKey);
         }
     }
     catch(const char* e) {

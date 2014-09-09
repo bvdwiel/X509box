@@ -128,3 +128,25 @@ std::string X509::generatePrivateKey(unsigned int numBits) {
 	this->privateKey = pemBuffer;
 	return pemBuffer;
 }
+
+bool X509::validateRsaKey(std::string rsaKey) {
+	int res;
+	gnutls_x509_privkey_t myPrivateKey;
+	gnutls_datum_t pem;
+	size_t size;
+
+	pem.data = (unsigned char*)rsaKey.c_str();
+	pem.size = rsaKey.size();
+
+	if ( gnutls_x509_privkey_init(&myPrivateKey) != 0 ) {
+		throw ( "FATAL ERROR: failed to initialize the private key object. This is a bug. Please alert author." );
+	}
+
+	res = gnutls_x509_privkey_import ( myPrivateKey, &pem, GNUTLS_X509_FMT_PEM );
+	gnutls_x509_privkey_deinit ( myPrivateKey );
+
+	if ( res == 0 ) {
+		return( true );
+	}
+	return ( false );
+}
