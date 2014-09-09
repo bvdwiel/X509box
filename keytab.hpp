@@ -16,7 +16,7 @@ public:
 	~keyTab();
 private slots:
 	void generateKey();
-	QString loadFile();
+	void loadFile();
 	void saveFile();
 private:
 	QLabel* keyLabel;
@@ -24,6 +24,7 @@ private:
 	QPushButton* generateKeyButton;
 	QPushButton* loadKeyButton;
 	QPushButton* saveKeyButton;
+	QString loadedKey;
 	OID* myOid;
 	X509* myCrypto;
 };

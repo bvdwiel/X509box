@@ -41,12 +41,26 @@ keyTab::~keyTab() {
 	delete myOid;
 }
 
-QString keyTab::loadFile() {
-    QString fileName = QFileDialog::getOpenFileName(this,
-	tr("Load RSA private key"), "",
-	tr("RSA private key (*.txt);;All files (*)"));
-    if ( fileName.isEmpty()) {
-	return(fileName);
+void keyTab::loadFile() {
+    try {
+        QString fileName = QFileDialog::getOpenFileName(this,
+	    tr("Load RSA private key"), "",
+	    tr("RSA private key (*.txt);;All files (*)"));
+        if ( fileName.isEmpty()) {
+	    throw("You should select a file to load the private key from.");
+        }
+	else {
+            QFile file(fileName);
+            if (!file.open(QIODevice::ReadOnly)) {
+                throw("Unable to open file.");
+            }
+            QTextStream in(&file);
+	    loadedKey = in.readAll();
+        }
+    }
+    catch(const char* e) {
+	QMessageBox::warning(this, tr("Error"), e);
+	return;
     }
 }
 
