@@ -16,11 +16,13 @@ public:
 	~keyTab();
 private slots:
 	void generateKey();
+	QString loadFile();
 	void saveFile();
 private:
 	QLabel* keyLabel;
 	QTextEdit* keyField;
 	QPushButton* generateKeyButton;
+	QPushButton* loadKeyButton;
 	QPushButton* saveKeyButton;
 	OID* myOid;
 	X509* myCrypto;

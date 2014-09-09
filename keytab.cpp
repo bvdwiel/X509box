@@ -5,6 +5,7 @@ keyTab::keyTab(mainDialog* parent) {
 	keyField = new QTextEdit();
 	keyLabel = new QLabel(tr("Your private key:"));
 	generateKeyButton = new QPushButton(tr("Generate key"));
+	loadKeyButton = new QPushButton(tr("Load key"));
 	saveKeyButton = new QPushButton(tr("Save key"));
 
 	/* Configure controls */
@@ -17,6 +18,7 @@ keyTab::keyTab(mainDialog* parent) {
 	/* Arrange widgets into layouts */
 	QHBoxLayout* buttonsLayout = new QHBoxLayout;
 	buttonsLayout->addWidget(generateKeyButton);
+	buttonsLayout->addWidget(loadKeyButton);
 	buttonsLayout->addWidget(saveKeyButton);
 
 	QVBoxLayout* keyLayout = new QVBoxLayout;
@@ -27,6 +29,7 @@ keyTab::keyTab(mainDialog* parent) {
 
 	/* Signal/slot collections */
 	connect(generateKeyButton, SIGNAL(clicked()), this, SLOT(generateKey()));
+	connect(loadKeyButton, SIGNAL(clicked()), this, SLOT(loadFile()));
 	connect(saveKeyButton, SIGNAL(clicked()), this, SLOT(saveFile()));
 
 	myCrypto = parent->crypto;
@@ -36,6 +39,15 @@ keyTab::keyTab(mainDialog* parent) {
 keyTab::~keyTab() {
 	delete myCrypto;
 	delete myOid;
+}
+
+QString keyTab::loadFile() {
+    QString fileName = QFileDialog::getOpenFileName(this,
+	tr("Load RSA private key"), "",
+	tr("RSA private key (*.txt);;All files (*)"));
+    if ( fileName.isEmpty()) {
+	return(fileName);
+    }
 }
 
 void keyTab::saveFile() {
