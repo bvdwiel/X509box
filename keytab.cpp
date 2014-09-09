@@ -59,6 +59,7 @@ void keyTab::loadFile() {
             if ( myCrypto->validateRsaKey(loadedKey.toStdString()) == false ) {
 		throw("The file you opened does not contain a valid key, or the key is encrypted. X509box does not support encrypted keys.");
             }
+            myCrypto->setPrivateKey(loadedKey.toStdString());
             keyField->setText(loadedKey);
         }
     }

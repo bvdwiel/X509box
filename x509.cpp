@@ -129,6 +129,13 @@ std::string X509::generatePrivateKey(unsigned int numBits) {
 	return pemBuffer;
 }
 
+void X509::setPrivateKey(std::string rsaKey) {
+	if ( validateRsaKey(rsaKey) == false ) {
+		throw("Error: Failed to set the private key. This is a bug, please inform author.");
+	}
+	this->privateKey = rsaKey;
+}
+
 bool X509::validateRsaKey(std::string rsaKey) {
 	int res;
 	gnutls_x509_privkey_t myPrivateKey;

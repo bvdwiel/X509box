@@ -20,6 +20,7 @@ public:
 	std::string generateCSR(OID* oid);
 	std::string generatePrivateKey();
 	std::string generatePrivateKey(unsigned int numBits);
+	void setPrivateKey(std::string rsaKey);
 	bool validateRsaKey(std::string rsaKey);
 	void debug();
 protected:
