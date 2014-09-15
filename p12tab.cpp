@@ -17,6 +17,7 @@ p12Tab::p12Tab(QWidget* parent) {
     QLineEdit* ownKeyFileName;
     QPushButton* ownKeyBrowseButton;
     QGroupBox* ownCertGroup;
+    QPushButton* generatePfxButton;
 
     intermediateStack = new QVBoxLayout;
     windowLayout = new QVBoxLayout;
@@ -58,11 +59,15 @@ p12Tab::p12Tab(QWidget* parent) {
     ownCertStack->addLayout(ownKeyFileLayout);
     ownCertGroup->setLayout(ownCertStack);
 
+    // Generate PFX button
+    generatePfxButton = new QPushButton(tr("Generate PFX-file"));
+
     // Compose the actual tab contents into a QVBoxLayout
     windowLayout->addWidget(intermediateGroup);
     windowLayout->addLayout(intermediateControlsLayout);
     windowLayout->addWidget(ownCertGroup);
     windowLayout->addStretch();
+    windowLayout->addWidget(generatePfxButton);
 
     setLayout(windowLayout);
 }
