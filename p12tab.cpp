@@ -22,7 +22,7 @@ p12Tab::p12Tab(QWidget* parent) {
     intermediateStack = new QVBoxLayout;
     windowLayout = new QVBoxLayout;
     intermediateControlsLayout = new QHBoxLayout;
-    intermediateGroup = new QGroupBox(tr("Intermediate CA certificates"));
+    intermediateGroup = new QGroupBox(tr("Root and Intermediate CA certificates"));
     addIntermediateButton = new QPushButton(tr("+"));
     removeIntermediateButton = new QPushButton(tr("-"));
 
