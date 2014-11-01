@@ -10,6 +10,7 @@ mainDialog::mainDialog(QWidget* parent) : QDialog(parent) {
 	tabs->addTab(new keyTab(this), tr("Private key"));
 	tabs->addTab(new csrTab(this), tr("Signing request"));
 	tabs->addTab(new p12Tab(this), tr("PFX generator"));
+        tabs->addTab(new aboutTab(this), tr("About"));
 
 	QVBoxLayout* mainLayout = new QVBoxLayout;
 	quitButton = new QPushButton(tr("Quit"));
