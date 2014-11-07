@@ -73,6 +73,14 @@ dataTab::dataTab(mainDialog* parent) {
 	myCrypto = parent->crypto;
 	myOid = parent->oid;
 
+	/* Load existing values from myOid into fields */
+	countryField->setText(QString::fromUtf8(myOid->getCountryName().c_str()));
+	stateField->setText(QString::fromUtf8(myOid->getStateOrProvinceName().c_str()));
+	localityField->setText(QString::fromUtf8(myOid->getLocalityName().c_str()));
+	organizationField->setText(QString::fromUtf8(myOid->getOrganizationName().c_str()));
+	organizationalUnitField->setText(QString::fromUtf8(myOid->getOrganizationalUnitName().c_str()));
+	commonNameField->setText(QString::fromUtf8(myOid->getCommonName().c_str()));
+
 	/* Signal/slot-connections */
 	connect(countryField, SIGNAL(editingFinished()), this, SLOT(setCountry()));
 	connect(stateField, SIGNAL(editingFinished()), this, SLOT(setState()));
