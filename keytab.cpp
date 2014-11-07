@@ -10,7 +10,7 @@ keyTab::keyTab(mainDialog* parent) {
 
 	/* Configure controls */
 	keyField->setFontFamily("Courier");
-	keyField->setMinimumWidth(500);
+	keyField->setMinimumWidth(getKeyWidgetWidth(keyField));
 	keyField->setMinimumHeight(450);
 	keyField->setReadOnly(true);
 	saveKeyButton->setEnabled(false);
@@ -39,6 +39,13 @@ keyTab::keyTab(mainDialog* parent) {
 keyTab::~keyTab() {
 	delete myCrypto;
 	delete myOid;
+}
+
+int keyTab::getKeyWidgetWidth(QTextEdit* widget) {
+    QFontMetrics m (widget->font());
+    QChar c('W');
+    int rowWidth = (m.width(c) * 40);
+    return rowWidth;
 }
 
 void keyTab::loadFile() {

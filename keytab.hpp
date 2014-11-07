@@ -15,6 +15,7 @@ public:
 	keyTab(mainDialog* parent);
 	~keyTab();
 private slots:
+	int getKeyWidgetWidth(QTextEdit* widget);
 	void generateKey();
 	void loadFile();
 	void saveFile();
