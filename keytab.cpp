@@ -4,6 +4,8 @@
 keyTab::keyTab(mainDialog* parent) {
 	keyField = new QTextEdit();
 	keyLabel = new QLabel(tr("Your private key:"));
+	passPhraseLabel = new QLabel(tr("Passphrase to protect your key:"));
+	passPhraseField = new QTextEdit();
 	generateKeyButton = new QPushButton(tr("Generate key"));
 	loadKeyButton = new QPushButton(tr("Load key"));
 	saveKeyButton = new QPushButton(tr("Save key"));
@@ -24,6 +26,8 @@ keyTab::keyTab(mainDialog* parent) {
 	QVBoxLayout* keyLayout = new QVBoxLayout;
 	keyLayout->addWidget(keyLabel);
 	keyLayout->addWidget(keyField);
+	keyLayout->addWidget(passPhraseLabel);
+	keyLayout->addWidget(passPhraseField);
 	keyLayout->addLayout(buttonsLayout);
 	setLayout(keyLayout);
 
