@@ -70,7 +70,9 @@ For general use in ecommerce applications, the protection of e-mail and other on
 \subsection{Generate private key}
 X509box's second tab allows you to generate a private key. Although it's not strictly required for a private key, you would do well to adopt the habit of first filling out the metadata fields if you intend to actually generate a CSR based on this key.
 
-The actual generation of a private key is simple, just hit the button and the text field will fill with a lot of what appears to be gibberish. This is actually your key, thouh, encoded in a format which makes it easy to handle as text. Many applications refer to this format as PEM.
+The actual generation of a private key is simple, just hit the button and the text field will fill with a lot of what appears to be gibberish. This is actually your key, though, encoded in a format which makes it easy to handle as text. Many applications refer to this format as PEM.
+
+If you need a so-called `armored' private key, for instance because you need to transmit it across public channels before use, you should enter a strong passphrase into the box labeled `Passphrase'. Remember what you enter here, because the final key will be encrypted using this passphrase as a protection. The key and any related certificate will be useless if you don't remember this passphrase.
 
 You could copy/paste the key from the text field if you need to enter it into some sort of interface, like a web form or graphical application. If you prefer to store it as a file, just hit the 'save' button and you'll have the key stored as a text file.
 
