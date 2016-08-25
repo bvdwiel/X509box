@@ -102,26 +102,32 @@ std::string X509::generateCSR(OID* oid) {
 	return pemCsrBuffer;
 }
 
-std::string X509::generatePrivateKey() {
-	/* Generate a sane default of 2048 bits if you don't care */
-	return(this->generatePrivateKey(2048));
-}
-
-std::string X509::generatePrivateKey(unsigned int numBits) {
+std::string X509::generatePrivateKey(unsigned int numBits=1024, std::string passPhrase=NULL ) {
 	if (numBits < 1024) {
 		throw("FATAL ERROR: Using insecure keylength < 1024 bits.");
 	}
 	gnutls_x509_privkey_t myPrivateKey;
-	unsigned char buffer[10 * 1024];
-	size_t buffer_size = sizeof(buffer);
 	if ( gnutls_x509_privkey_init(&myPrivateKey) != 0 ) {
 		throw ( "FATAL ERROR: failed to initialize the private key object." );
 	}
 	if ( gnutls_x509_privkey_generate(myPrivateKey, GNUTLS_PK_RSA, numBits, 0) != 0 ) {
 		throw ( "FATAL ERROR: failed to generate the private key." );
 	}
-	if ( gnutls_x509_privkey_export(myPrivateKey, GNUTLS_X509_FMT_PEM, buffer, &buffer_size) != 0 ) {
-		throw ( "FATAL ERROR: failed to export the private key to PEM format." );
+	if ( passPhrase.empty() ) {
+		// Export an unprotected private key
+		unsigned char buffer[10 * 1024];
+		size_t buffer_size = sizeof(buffer);
+		if ( gnutls_x509_privkey_export(myPrivateKey, GNUTLS_X509_FMT_PEM, buffer, &buffer_size) != 0 ) {
+			throw ( "FATAL ERROR: failed to export the private key to PEM format." );
+		}
+	}
+	else {
+		// Export a protected private key
+		// We don't really know how to do this yet ;-)
+		throw ( "LAZY DEVELOPER ALERT: feature not implemented yet." );
+		/* if ( gnutls_x509_privkey_export2_pkcs8(myPrivateKey, GNUTLS_X509_FMT_PEM, passPhrase.c_str()) != 0 ) {
+			throw ( "FATAL ERROR: failed to export the protected private key to PEM format." );
+		} */
 	}
 	std::string pemBuffer((const char*) buffer);
 	gnutls_x509_privkey_deinit(myPrivateKey);

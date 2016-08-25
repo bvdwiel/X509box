@@ -18,8 +18,8 @@ public:
 	~X509();
 	std::string generateCSR();
 	std::string generateCSR(OID* oid);
-	std::string generatePrivateKey();
-	std::string generatePrivateKey(unsigned int numBits);
+	//std::string generatePrivateKey();
+	std::string generatePrivateKey(unsigned int numBits, std::string passPhrase);
 	void setPrivateKey(std::string rsaKey);
 	bool validateRsaKey(std::string rsaKey);
 	void debug();

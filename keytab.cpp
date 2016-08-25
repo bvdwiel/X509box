@@ -101,7 +101,7 @@ void keyTab::saveFile() {
 
 void keyTab::generateKey() {
 	try {
-		QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey(myOid->getKeySize()).c_str());
+		QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey(myOid->getKeySize(),myOid->getPassPhrase()).c_str());
 		keyField->setText(keyData);
 		saveKeyButton->setEnabled(true);
 	}

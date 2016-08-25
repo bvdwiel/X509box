@@ -49,6 +49,10 @@ std::string OID::getCommonName() {
 	return ( this->commonName );
 }
 
+std::string OID::getPassPhrase() {
+	return ( this->passPhrase );
+}
+
 /* Setters */
 void OID::setKeySize(unsigned int keySize) {
 	this->keySize = keySize;
@@ -78,3 +82,8 @@ void OID::setOrganizationalUnitName(std::string organizationalUnitName) {
 void OID::setCommonName(std::string commonName) {
 	this->commonName = commonName;
 }
+
+void OID::setPassPhrase(std::string passPhrase) {
+	this->passPhrase = passPhrase;
+}
+
