@@ -5,7 +5,7 @@ keyTab::keyTab(mainDialog* parent) {
 	keyField = new QTextEdit();
 	keyLabel = new QLabel(tr("Your private key:"));
 	passPhraseLabel = new QLabel(tr("Passphrase to protect your key:"));
-	passPhraseField = new QTextEdit();
+	passPhraseField = new QLineEdit();
 	generateKeyButton = new QPushButton(tr("Generate key"));
 	loadKeyButton = new QPushButton(tr("Load key"));
 	saveKeyButton = new QPushButton(tr("Save key"));
@@ -15,6 +15,7 @@ keyTab::keyTab(mainDialog* parent) {
 	keyField->setMinimumWidth(getKeyWidgetWidth(keyField));
 	keyField->setMinimumHeight(450);
 	keyField->setReadOnly(true);
+	passPhraseField->setEchoMode(QLineEdit::Password);
 	saveKeyButton->setEnabled(false);
 
 	/* Arrange widgets into layouts */
@@ -101,7 +102,7 @@ void keyTab::saveFile() {
 
 void keyTab::generateKey() {
 	try {
-		QString passPhrase = passPhraseField->toPlainText();
+		QString passPhrase = passPhraseField->text();
 		myOid->setPassPhrase(passPhrase.toUtf8().constData());
 		QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey(myOid->getKeySize(),myOid->getPassPhrase()).c_str());
 		keyField->setText(keyData);

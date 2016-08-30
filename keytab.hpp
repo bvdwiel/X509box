@@ -23,7 +23,7 @@ private:
 	QLabel* keyLabel;
 	QTextEdit* keyField;
 	QLabel* passPhraseLabel;
-	QTextEdit* passPhraseField;
+	QLineEdit* passPhraseField;
 	QPushButton* generateKeyButton;
 	QPushButton* loadKeyButton;
 	QPushButton* saveKeyButton;
