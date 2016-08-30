@@ -121,19 +121,17 @@ std::string X509::generatePrivateKey(unsigned int numBits=1024, std::string pass
 		if ( gnutls_x509_privkey_export(myPrivateKey, GNUTLS_X509_FMT_PEM, buffer, &buffer_size) != 0 ) {
 			throw ( "FATAL ERROR: failed to export the private key to PEM format." );
 		}
-		std::string pemBuffer((const char*) buffer);
-		this->privateKey = pemBuffer;
-		std::cerr << this->privateKey.c_str();
+		std::string keyData((const char*) buffer);
+		pemBuffer= keyData;
 	}
 	else {
 		// Export a protected private key
-		// throw ( "LAZY DEVELOPER ALERT: You entered a passphrase but that feature isn't properly implemented yet." );
 		gnutls_datum_t pem;
 		if ( gnutls_x509_privkey_export2_pkcs8(myPrivateKey, GNUTLS_X509_FMT_PEM, passPhrase.c_str(),GNUTLS_PKCS_PBES2_AES_128,&pem) != 0 ) {
 			throw ( "FATAL ERROR: failed to export the protected private key to PEM format." );
 		}
 		std::string keyData(reinterpret_cast<char*>(pem.data));
-		std::cout << keyData.c_str();
+		pemBuffer = keyData;
 	}
 	gnutls_x509_privkey_deinit(myPrivateKey);
 	this->privateKey = pemBuffer;
