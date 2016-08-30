@@ -31,7 +31,7 @@ keyTab::keyTab(mainDialog* parent) {
 	keyLayout->addLayout(buttonsLayout);
 	setLayout(keyLayout);
 
-	/* Signal/slot collections */
+	/* Signal/slot connections */
 	connect(generateKeyButton, SIGNAL(clicked()), this, SLOT(generateKey()));
 	connect(loadKeyButton, SIGNAL(clicked()), this, SLOT(loadFile()));
 	connect(saveKeyButton, SIGNAL(clicked()), this, SLOT(saveFile()));
@@ -101,6 +101,8 @@ void keyTab::saveFile() {
 
 void keyTab::generateKey() {
 	try {
+		QString passPhrase = passPhraseField->toPlainText();
+		myOid->setPassPhrase(passPhrase.toUtf8().constData());
 		QString keyData = QString::fromUtf8(myCrypto->generatePrivateKey(myOid->getKeySize(),myOid->getPassPhrase()).c_str());
 		keyField->setText(keyData);
 		saveKeyButton->setEnabled(true);

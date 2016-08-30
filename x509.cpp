@@ -106,6 +106,7 @@ std::string X509::generatePrivateKey(unsigned int numBits=1024, std::string pass
 	if (numBits < 1024) {
 		throw("FATAL ERROR: Using insecure keylength < 1024 bits.");
 	}
+	std::string pemBuffer;
 	gnutls_x509_privkey_t myPrivateKey;
 	if ( gnutls_x509_privkey_init(&myPrivateKey) != 0 ) {
 		throw ( "FATAL ERROR: failed to initialize the private key object." );
@@ -120,16 +121,20 @@ std::string X509::generatePrivateKey(unsigned int numBits=1024, std::string pass
 		if ( gnutls_x509_privkey_export(myPrivateKey, GNUTLS_X509_FMT_PEM, buffer, &buffer_size) != 0 ) {
 			throw ( "FATAL ERROR: failed to export the private key to PEM format." );
 		}
+		std::string pemBuffer((const char*) buffer);
+		this->privateKey = pemBuffer;
+		std::cerr << this->privateKey.c_str();
 	}
 	else {
 		// Export a protected private key
-		// We don't really know how to do this yet ;-)
-		throw ( "LAZY DEVELOPER ALERT: feature not implemented yet." );
-		/* if ( gnutls_x509_privkey_export2_pkcs8(myPrivateKey, GNUTLS_X509_FMT_PEM, passPhrase.c_str()) != 0 ) {
+		// throw ( "LAZY DEVELOPER ALERT: You entered a passphrase but that feature isn't properly implemented yet." );
+		gnutls_datum_t pem;
+		if ( gnutls_x509_privkey_export2_pkcs8(myPrivateKey, GNUTLS_X509_FMT_PEM, passPhrase.c_str(),GNUTLS_PKCS_PBES2_AES_128,&pem) != 0 ) {
 			throw ( "FATAL ERROR: failed to export the protected private key to PEM format." );
-		} */
+		}
+		std::string keyData(reinterpret_cast<char*>(pem.data));
+		std::cout << keyData.c_str();
 	}
-	std::string pemBuffer((const char*) buffer);
 	gnutls_x509_privkey_deinit(myPrivateKey);
 	this->privateKey = pemBuffer;
 	return pemBuffer;
@@ -152,7 +157,7 @@ bool X509::validateRsaKey(std::string rsaKey) {
 	pem.size = rsaKey.size();
 
 	if ( gnutls_x509_privkey_init(&myPrivateKey) != 0 ) {
-		throw ( "FATAL ERROR: failed to initialize the private key object. This is a bug. Please alert author." );
+		throw ( "FATAL ERROR: Failed to validate key." );
 	}
 
 	res = gnutls_x509_privkey_import ( myPrivateKey, &pem, GNUTLS_X509_FMT_PEM );
