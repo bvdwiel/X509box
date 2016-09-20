@@ -2,6 +2,7 @@
 
 X509::X509() {
 	gnutls_global_init();
+	privateKeyEncrypted = false;
 	objectID = NULL;
 	objectID = new OID;
 }
@@ -42,9 +43,14 @@ std::string X509::generateCSR(OID* oid) {
 	if ( gnutls_x509_privkey_init(&tempKey) < 0 ) {
 		throw( "FATAL ERROR: failed to init temporary privkey structure while generating CSR.");
 	}
-	if ( gnutls_x509_privkey_import2(tempKey, &pemdata, GNUTLS_X509_FMT_PEM, NULL, 0) < 0 ) {
-		throw ( "FATAL ERROR: failed to import private key while generating CSR." );
-	}
+        if ( this->privateKeyEncrypted == false ) {
+	  if ( gnutls_x509_privkey_import2(tempKey, &pemdata, GNUTLS_X509_FMT_PEM, NULL, 0) < 0 ) {
+	  	throw ( "FATAL ERROR: failed to import private key while generating CSR." );
+	  }
+        }
+        else {
+          throw ( "FATAL ERROR: Can't handle encrypted private keys yet." );
+        }
 	if ( gnutls_x509_crq_init(&CSR) < 0) {
 		throw ( "FATAL ERROR: failed to initialize CSR struct." );
 	}
@@ -123,6 +129,7 @@ std::string X509::generatePrivateKey(unsigned int numBits=1024, std::string pass
 		}
 		std::string keyData((const char*) buffer);
 		pemBuffer= keyData;
+		this->privateKeyEncrypted = false;
 	}
 	else {
 		// Export a protected private key
@@ -132,6 +139,7 @@ std::string X509::generatePrivateKey(unsigned int numBits=1024, std::string pass
 		}
 		std::string keyData(reinterpret_cast<char*>(pem.data));
 		pemBuffer = keyData;
+		this->privateKeyEncrypted = true;
 	}
 	gnutls_x509_privkey_deinit(myPrivateKey);
 	this->privateKey = pemBuffer;

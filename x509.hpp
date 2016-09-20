@@ -26,6 +26,7 @@ public:
 protected:
 	std::string pemCSR;
 	std::string privateKey;
+	bool privateKeyEncrypted;
 	OID* objectID;
 };
 
