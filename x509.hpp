@@ -28,6 +28,8 @@ protected:
 	std::string privateKey;
 	bool privateKeyEncrypted;
 	OID* objectID;
+private:
+	std::string passPhrase;
 };
 
 #endif /*CSR_H*/
