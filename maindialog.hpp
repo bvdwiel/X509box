@@ -14,7 +14,6 @@
 #include "csrtab.hpp"
 #include "datatab.hpp"
 #include "keytab.hpp"
-#include "p12tab.hpp"
 #include "abouttab.hpp"
 
 class QComboBox;
