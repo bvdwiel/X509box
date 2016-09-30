@@ -15,15 +15,16 @@
 class privkey {
 public:
 	privkey();
+	privkey(int keySize);
 	~privkey();
 	std::string getPem();
 	void generate(int keySize);
-	void generate(int keySize, std::string passPhrase);
 	void encrypt(std::string passPhrase);
 protected:
 private:
 	bool isEncrypted;
 	std::string passPhrase;
+	std::string pemKey;
 	gnutls_x509_privkey_t keyData;
 };
 

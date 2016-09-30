@@ -4,7 +4,7 @@ project (X509box)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-add_executable(X509box main.cpp x509.cpp oid.cpp maindialog.cpp csrtab.cpp datatab.cpp keytab.cpp abouttab.cpp)
+add_executable(X509box main.cpp x509.cpp oid.cpp maindialog.cpp csrtab.cpp datatab.cpp privkey.cpp keytab.cpp abouttab.cpp)
 
 find_package (GnuTLS REQUIRED)
 find_package (Qt5Gui REQUIRED)
